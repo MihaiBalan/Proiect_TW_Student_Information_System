@@ -1,0 +1,13 @@
+GET http://localhost:8080/ProiectTW/app_user?id=1
+Accept: application/json
+
+###
+POST http://localhost:8080/ProiectTW
+Content-Type: application/json
+
+{
+  "firstName": "Aaa",
+  "lastName": "Bbb",
+  "email": "Aaa.Bbb99@e-uvt.ro",
+  "password": "pass"
+}
