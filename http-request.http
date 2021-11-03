@@ -6,8 +6,8 @@ POST http://localhost:8080/ProiectTW
 Content-Type: application/json
 
 {
-  "firstName": "Aaa",
-  "lastName": "Bbb",
-  "email": "Aaa.Bbb99@e-uvt.ro",
-  "password": "pass"
+  "firstName": "Mihai",
+  "lastName": "Balan",
+  "email": "mihaibalan00@yahoo.com",
+  "password": "password"
 }
