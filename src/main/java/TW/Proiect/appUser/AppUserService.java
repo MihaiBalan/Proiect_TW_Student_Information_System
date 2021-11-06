@@ -1,6 +1,8 @@
 package TW.Proiect.appUser;
 
+import TW.Proiect.Exception.UserNotFoundException;
 import TW.Proiect.Registration.token.ConfirmationToken;
+import TW.Proiect.Registration.token.ConfirmationTokenRepository;
 import TW.Proiect.Registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -18,6 +21,7 @@ public class AppUserService implements UserDetailsService {
 
     private final static String USER_NOT_FOUND_MSG = "User with email %s not found";
     private final AppUserRepository appUserRepository;
+    private final ConfirmationTokenRepository confirmationTokenRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
 
@@ -66,4 +70,27 @@ public class AppUserService implements UserDetailsService {
     public int enableAppUser(String email) {
         return appUserRepository.enableAppUser(email);
     }
+
+    public AppUser addUser(AppUser user){
+        return appUserRepository.save(user);
+    }
+
+    public List<AppUser> findAllUsersByRole(AppUserRole role) {
+        return appUserRepository.findByAppUserRole(role);
+    }
+
+    public AppUser updateAppUser(AppUser user){
+        appUserRepository.updateAppUser(user.getFirstName(), user.getLastName(), user.getEmail());
+        return user;
+    }
+
+    public void deleteUser(Long id){
+        confirmationTokenRepository.deleteConfirmationTokensByAppUserID(appUserRepository.getById(id));
+        appUserRepository.deleteAppUserById(id);
+    }
+
+    public AppUser findUserById(Long id){
+        return appUserRepository.findAppUserById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found"));
+    }
+
 }

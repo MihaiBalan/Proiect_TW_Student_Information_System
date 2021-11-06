@@ -1,4 +1,25 @@
-GET http://localhost:8080/ProiectTW/app_user?id=1
+DELETE http://localhost:8080/ProiectTW/delete/8
+Accept: application/json
+
+###
+PUT http://localhost:8080/ProiectTW/update
+Content-Type: application/json
+
+{"firstName": "MihaiUpdatedx2",
+  "lastName": "BalanUpdatedx2",
+  "email": "mihaibalan00@yahoo.com"
+}
+
+###
+
+###
+GET http://localhost:8080/ProiectTW/all/STUDENT
+Accept: application/json
+
+
+
+###
+GET http://localhost:8080/ProiectTW/find/1
 Accept: application/json
 
 ###
@@ -8,6 +29,8 @@ Content-Type: application/json
 {
   "firstName": "Mihai",
   "lastName": "Balan",
-  "email": "mihaibalan00@yahoo.com",
+  "email": "mihai.balan00@e-uvt.ro",
   "password": "password"
 }
+
+
