@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" style="color:white;">Student Manager</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -6,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" (click)="onOpenModal(appUser!,'add')">Add AppUser <span class="sr-only">(current)</span></a>
+        <a class="nav-link" (click)="onOpenModal(appUser!,'add'); open(updateAppUserModal)">Add AppUser <span class="sr-only">(current)</span></a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -30,8 +31,8 @@
         </ul>
         <div class="card-body">
           <div class="float-right btn-group btn-group-sm">
-            <button type="button" (click)="onOpenModal(appUser, 'edit')" class="btn btn-primary" data-toggle="modal" data-target="#editAppUserModal" data-placement="top"><i class="fa fa-pencil"></i> </button>
-            <button type="button" (click)="onOpenModal(appUser, 'delete')" class="btn btn-secondary" data-toggle="modal" data-target="#deleteAppUserModal" data-placement="top"><i class="fa fa-times"></i> </button>
+            <button class="btn btn-primary tooltips" (click)="open(updateAppUserModal); onOpenModal(appUser!,'edit');"><i class="fa fa-pencil"></i> </button>
+            <button class="btn btn-secondary tooltips" (click)="open(deleteAppUserModal); onOpenModal(appUser!,'delete');"><i class="fa fa-times"></i> </button>
           </div>
         </div>
       </div>
@@ -39,102 +40,91 @@
   </div>
 
   <!-- Add AppUser Modal -->
-  <div class="modal fade" id="addAppUserModal" tabindex="-1" role="dialog" aria-labelledby="addAppUserModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addAppUserModalLabel">Add AppUser</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form #addForm="ngForm" (ngSubmit)="onAddAppUser(addForm)">
-            <div class="form-group">
-              <label for="firstName">First Name</label>
-              <input type="text" ngModel name="firstName" class="form-control" id="firstName" placeholder="FirstName" required>
-            </div>
-            <div class="form-group">
-              <label for="lastName">Last Name</label>
-              <input type="text" ngModel name="lastName" class="form-control" id="lastName" placeholder="LastName" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" ngModel name="email" class="form-control" id="email" placeholder="Email" required>
-            </div>
-            <div class="form-group">
-              <label for="role">Role</label>
-              <input type="text" ngModel name="role" class="form-control" id="role" placeholder="Role" required>
-            </div>
-            <div class="modal-footer">
-              <button type="button" id="add-appUser-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
-            </div>
-          </form>
-        </div>
-      </div>
+  <ng-template #addAppUserModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="addAppUserModalLabel">Add AppUser</h5>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
-  </div>
-
-  <!-- Edit Modal -->
-  <div class="modal fade" id="updateAppUserModal" tabindex="-1" role="dialog" aria-labelledby="appUserEditModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="updateAppUserModalLabel">Edit AppUser{{editAppUser?.firstName}}</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+    <div class="modal-body">
+      <form #addForm="ngForm">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" ngModel name="firstName" class="form-control" id="firstName" placeholder="FirstName" required>
         </div>
-        <div class="modal-body">
-          <form #editForm="ngForm">
-            <div class="form-group">
-              <label for="firstName">First Name</label>
-              <input type="text" ngModel="{{editAppUser?.firstName}}" name="firstName" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="FirstName">
-            </div>
-            <div class="form-group">
-              <label for="lastName">Last Name</label>
-              <input type="text" ngModel="{{editAppUser?.lastName}}" name="lastName" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="LastName">
-            </div>
-            <input type="hidden" ngModel="{{editAppUser?.id}}" name="id" class="form-control" id="id" placeholder="Id">
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" ngModel="{{editAppUser?.email}}" name="email" class="form-control" id="email" placeholder="Email">
-            </div>
-            <div class="form-group">
-              <label for="role">Role</label>
-              <input type="text" ngModel="{{editAppUser?.appUserRole}}" name="appUserRole" class="form-control" id="appUserRole" placeholder="User Role">
-            </div>
-            <div class="modal-footer">
-              <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
-              <button (click)="onUpdateAppUser(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
-            </div>
-          </form>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" ngModel name="lastName" class="form-control" id="lastName" placeholder="LastName" required>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Delete Modal -->
-  <div class="modal" id="deleteAppUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteAppUserModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteAppUserModalLabel">Delete AppUser</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" ngModel name="email" class="form-control" id="email" placeholder="Email" required>
         </div>
-        <div class="modal-body">
-          <p>Are you sure you want to delete AppUser {{deleteAppUser?.firstName}} {{deleteAppUser?.lastName}}?</p>
+        <div class="form-group">
+          <label for="role">Role</label>
+          <input type="text" ngModel name="role" class="form-control" id="role" placeholder="Role" required>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-          <button (click)="onDeleteAppUser(deleteAppUser?.id!)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+          <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">Close</button>
+          <button type="submit" class="btn btn-primary" (click)="onAddAppUser(addForm.value);modal.close('Save click')">Save changes</button>
         </div>
-      </div>
+      </form>
     </div>
-  </div>
+  </ng-template>
+
+  <!-- Edit Modal -->
+  <ng-template #updateAppUserModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="updateAppUserModalLabel">Edit AppUser{{editAppUser?.firstName}}</h5>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #editForm="ngForm">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" ngModel="{{editAppUser?.firstName}}" name="firstName" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="FirstName">
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" ngModel="{{editAppUser?.lastName}}" name="lastName" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="LastName">
+        </div>
+        <input type="hidden" ngModel="{{editAppUser?.id}}" name="id" class="form-control" id="id" placeholder="Id">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" ngModel="{{editAppUser?.email}}" name="email" class="form-control" id="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="role">Role</label>
+          <input type="text" ngModel="{{editAppUser?.appUserRole}}" name="appUserRole" class="form-control" id="appUserRole" placeholder="User Role">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">No</button>
+          <button class="btn btn-danger" (click)="onUpdateAppUser(editForm.value); modal.close('Save click')">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+
+
+  <!-- Delete Modal -->
+  <ng-template #deleteAppUserModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="deleteAppUserModalLabel">Delete AppUser</h5>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Are you sure you want to delete AppUser {{deleteAppUser?.firstName}} {{deleteAppUser?.lastName}}?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">No</button>
+      <button class="btn btn-danger" (click)="onDeleteAppUser(deleteAppUser?.id!); modal.close('Save click')">Yes</button>
+    </div>
+  </ng-template>
 </div>
 
 <!-- Notification for no appUsers -->

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/ProiectTW")
 public class AppUserResource {
     private final AppUserService appUserService;

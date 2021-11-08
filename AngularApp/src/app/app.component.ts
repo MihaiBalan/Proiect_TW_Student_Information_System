@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AppUser } from './appUser';
 import { AppUserService } from './appUser.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import {NgForm} from "@angular/forms";
+import { NgForm } from "@angular/forms";
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +16,30 @@ export class AppComponent implements OnInit {
   public appUser: AppUser | undefined;
   public editAppUser: AppUser | undefined;
   public deleteAppUser: AppUser | undefined;
+  title = "StudentInformationSystem";
+  closeResult: string | undefined;
 
-  constructor(private appUserService: AppUserService){}
+  constructor(private modalService: NgbModal, private appUserService: AppUserService) {}
+
+  open(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+
+
 
   ngOnInit() {
     this.getAppUsers();
@@ -35,19 +58,18 @@ export class AppComponent implements OnInit {
   }
 
   public getAppUser(id: number): void{
-      this.appUserService.getAppUser(id).subscribe(
-        (response: AppUser) =>{
-          this.appUser = response;
-          console.log(this.appUsers);
-        },
-        (error: HttpErrorResponse) => {
-          alert(error.message);
-        }
-      );
+    this.appUserService.getAppUser(id).subscribe(
+      (response: AppUser) =>{
+        this.appUser = response;
+        console.log(this.appUsers);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
   public onAddAppUser(addForm: NgForm): void {
-    document.getElementById('add-appUser-form')!.click();
     this.appUserService.addAppUser(addForm.value).subscribe(
       (response: AppUser) => {
         console.log(response);
@@ -104,25 +126,14 @@ export class AppComponent implements OnInit {
   }
 
   public onOpenModal(appUser: AppUser, mode: string): void {
-    const container = document.getElementById('main-container')!;
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.style.display = 'none';
-    button.setAttribute('data-toggle', 'modal');
     if (mode === 'add') {
-      button.setAttribute('data-target', '#addAppUserModal');
     }
     if (mode === 'edit') {
       this.editAppUser = appUser;
-      button.setAttribute('data-target', '#updateAppUserModal');
     }
     if (mode === 'delete') {
       this.deleteAppUser = appUser;
-      button.setAttribute('data-target', '#deleteAppUserModal');
     }
-
-    container.appendChild(button);
-    button.click();
   }
 
 }
