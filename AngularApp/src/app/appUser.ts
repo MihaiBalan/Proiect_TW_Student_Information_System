@@ -10,6 +10,7 @@ export interface AppUser {
   birthday: string;
   county: string;
   college: string;
+  phone: string;
   studyType: string;
   specialization: string;
   serialNumber: string;

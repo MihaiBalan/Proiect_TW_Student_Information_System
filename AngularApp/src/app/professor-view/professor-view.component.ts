@@ -16,6 +16,7 @@ export class ProfessorViewComponent implements OnInit {
   public appUser: AppUser | undefined;
   public editAppUser: AppUser | undefined;
   public deleteAppUser: AppUser | undefined;
+  public viewAppUser: AppUser | undefined;
   closeResult: string | undefined;
 
   constructor(private modalService: NgbModal, private appUserService: AppUserService) {}
@@ -37,8 +38,6 @@ export class ProfessorViewComponent implements OnInit {
       return  `with: ${reason}`;
     }
   }
-
-
 
   ngOnInit() {
     this.getAppUsers();
@@ -110,7 +109,8 @@ export class ProfessorViewComponent implements OnInit {
       if (appUser.firstName.toLowerCase().indexOf(key.toLowerCase()) !== -1
         || appUser.lastName.toLowerCase().indexOf(key.toLowerCase()) !== -1
         || appUser.email.toLowerCase().indexOf(key.toLowerCase()) !== -1
-        || appUser.appUserRole.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        || appUser.phone.indexOf(key) !== -1)
+        {
         results.push(appUser);
       }
     }
@@ -121,7 +121,8 @@ export class ProfessorViewComponent implements OnInit {
   }
 
   public onOpenModal(appUser: AppUser, mode: string): void {
-    if (mode === 'add') {
+    if (mode === 'view') {
+      this.viewAppUser = appUser;
     }
     if (mode === 'edit') {
       this.editAppUser = appUser;

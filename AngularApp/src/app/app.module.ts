@@ -10,6 +10,7 @@ import { ProfessorViewComponent } from "./professor-view";
 import { FormsModule } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { HttpClientModule } from "@angular/common/http";
+import { AdminViewComponent } from "./admin-view";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HttpClientModule } from "@angular/common/http";
     LoginComponent,
     RegisterComponent,
     StudentViewComponent,
-    ProfessorViewComponent
+    ProfessorViewComponent,
+    AdminViewComponent
   ],
   imports: [
     BrowserModule,

@@ -40,6 +40,7 @@ public class AppUser implements UserDetails {
     private Date birthday;
     private String county;
     private String college;
+    private String phone;
     private String specialization;
     private String serialNumber;
     private Boolean tax;
@@ -63,7 +64,7 @@ public class AppUser implements UserDetails {
         this.appUserRole = appUserRole;
     }
 
-    public AppUser(String firstName, String lastName, String email, String password, Date birthday, String county, String college, AppUserStudyType studyType, String specialization, String serialNumber, Boolean tax, String CNP, String CI, Integer year, AppUserGender gender, AppUserRole appUserRole) {
+    public AppUser(String firstName, String lastName, String email, String password, Date birthday, String county, String college, String phone, AppUserStudyType studyType, String specialization, String serialNumber, Boolean tax, String CNP, String CI, Integer year, AppUserGender gender, AppUserRole appUserRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -71,6 +72,7 @@ public class AppUser implements UserDetails {
         this.birthday = birthday;
         this.county = county;
         this.college = college;
+        this.phone = phone;
         this.studyType = studyType;
         this.specialization = specialization;
         this.serialNumber = serialNumber;
