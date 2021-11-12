@@ -1,0 +1,140 @@
+<!--suppress ALL -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" style="color:white;">View Students</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input type="search" (ngModelChange)="searchAppUsers(key.value)" #key="ngModel" ngModel
+             name="key" id="searchFirstName" class="form-control mr-sm-2" placeholder="Search appUsers..." required>
+    </form>
+  </div>
+</nav>
+<div class="container" id="main-container">
+  <div class="row">
+    <div *ngFor="let appUser of appUsers" class="col-sm-3">
+      <div class="card m-b-20">
+        <div class="card-body row">
+          <div class="col-12 card-title align-self-center mb-0">
+            <p class="text-center">{{appUser?.firstName}}</p>
+            <p class="text-center">{{appUser?.lastName}}</p>
+          </div>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><i class="fa fa-envelope float-right"></i><h6>{{appUser?.email}}</h6></li>
+        </ul>
+        <div class="card-body">
+          <div class="float-right btn-group btn-group-sm">
+            <button class="btn btn-primary tooltips" (click)="open(updateAppUserModal); onOpenModal(appUser!,'edit');"><i class="fa fa-pencil"></i> </button>
+            <button class="btn btn-secondary tooltips" (click)="open(deleteAppUserModal); onOpenModal(appUser!,'delete');"><i class="fa fa-times"></i> </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add AppUser Modal -->
+  <ng-template #addAppUserModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="addAppUserModalLabel">Add AppUser</h5>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #addForm="ngForm">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" ngModel name="firstName" class="form-control" id="firstName" placeholder="FirstName" required>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" ngModel name="lastName" class="form-control" id="lastName" placeholder="LastName" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" ngModel name="email" class="form-control" id="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" ngModel name="password" class="form-control" id="password" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+          <label for="role">Role</label>
+          <input type="text" ngModel name="role" class="form-control" id="role" placeholder="Role" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">Close</button>
+          <button type="submit" class="btn btn-primary" (click)="onAddAppUser(addForm);modal.close('Save click')">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+
+  <!-- Edit Modal -->
+  <ng-template #updateAppUserModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="updateAppUserModalLabel">Edit AppUser{{editAppUser?.firstName}}</h5>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #editForm="ngForm">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" ngModel="{{editAppUser?.firstName}}" name="firstName" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="FirstName">
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" ngModel="{{editAppUser?.lastName}}" name="lastName" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="LastName">
+        </div>
+        <input type="hidden" ngModel="{{editAppUser?.id}}" name="id" class="form-control" id="id" placeholder="Id">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" ngModel="{{editAppUser?.email}}" name="email" class="form-control" id="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="role">Role</label>
+          <input type="text" ngModel="{{editAppUser?.appUserRole}}" name="appUserRole" class="form-control" id="appUserRole" placeholder="User Role">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">No</button>
+          <button class="btn btn-danger" (click)="onUpdateAppUser(editForm.value); modal.close('Save click')">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+
+
+  <!-- Delete Modal -->
+  <ng-template #deleteAppUserModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="deleteAppUserModalLabel">Delete AppUser</h5>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Are you sure you want to delete AppUser {{deleteAppUser?.firstName}} {{deleteAppUser?.lastName}}?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">No</button>
+      <button class="btn btn-danger" (click)="onDeleteAppUser(deleteAppUser?.id!); modal.close('Save click')">Yes</button>
+    </div>
+  </ng-template>
+</div>
+
+<!-- Notification for no appUsers -->
+<div *ngIf="appUsers?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">NO USERS!</h4>
+    <p>No appUsers were found.</p>
+  </div>
+</div>
+

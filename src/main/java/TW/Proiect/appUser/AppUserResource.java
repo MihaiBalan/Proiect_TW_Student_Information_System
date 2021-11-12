@@ -10,6 +10,8 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping("/ProiectTW")
 public class AppUserResource {
+
+
     private final AppUserService appUserService;
 
     public AppUserResource(AppUserService appUserService) {
