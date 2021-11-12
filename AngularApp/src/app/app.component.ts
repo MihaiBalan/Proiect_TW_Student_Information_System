@@ -70,17 +70,13 @@ export class AppComponent implements OnInit {
   }
 
   public onAddAppUser(addForm: NgForm): void {
-    this.appUserService.addAppUser(addForm.value).subscribe(
-      (response: AppUser) => {
-        console.log(response);
+      this.appUserService.addAppUser(addForm.value);
         this.getAppUsers();
         addForm.reset();
-      },
       (error: HttpErrorResponse) => {
         alert(error.message);
         addForm.reset();
       }
-    );
   }
 
   public onUpdateAppUser(appUser: AppUser): void {

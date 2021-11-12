@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -36,6 +37,19 @@ public class AppUser implements UserDetails {
     private String lastName;
     private String email;
     private String password;
+    private Date birthday;
+    private String county;
+    private String college;
+    private String specialization;
+    private String serialNumber;
+    private Boolean tax;
+    private String CNP;
+    private String CI;
+    private Integer Year;
+    @Enumerated(EnumType.STRING)
+    private AppUserStudyType studyType;
+    @Enumerated(EnumType.STRING)
+    private AppUserGender gender;
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
     private Boolean locked = false;
@@ -46,6 +60,25 @@ public class AppUser implements UserDetails {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.appUserRole = appUserRole;
+    }
+
+    public AppUser(String firstName, String lastName, String email, String password, Date birthday, String county, String college, AppUserStudyType studyType, String specialization, String serialNumber, Boolean tax, String CNP, String CI, Integer year, AppUserGender gender, AppUserRole appUserRole) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.birthday = birthday;
+        this.county = county;
+        this.college = college;
+        this.studyType = studyType;
+        this.specialization = specialization;
+        this.serialNumber = serialNumber;
+        this.tax = tax;
+        this.CNP = CNP;
+        this.CI = CI;
+        Year = year;
+        this.gender = gender;
         this.appUserRole = appUserRole;
     }
 

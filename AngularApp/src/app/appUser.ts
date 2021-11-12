@@ -7,6 +7,17 @@ export interface AppUser {
   appUserRole: string;
   locked: boolean;
   enabled: boolean;
+  birthday: string;
+  county: string;
+  college: string;
+  studyType: string;
+  specialization: string;
+  serialNumber: string;
+  tax: boolean;
+  CNP: string;
+  CI: string;
+  Year: number;
+  gender: string;
 }
 
 

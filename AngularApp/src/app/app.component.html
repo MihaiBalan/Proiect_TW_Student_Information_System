@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" (click)="onOpenModal(appUser!,'add'); open(updateAppUserModal)">Add AppUser <span class="sr-only">(current)</span></a>
+        <a class="nav-link" (click)="onOpenModal(appUser!,'add'); open(addAppUserModal)">Add AppUser <span class="sr-only">(current)</span></a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -62,12 +62,16 @@
           <input type="email" ngModel name="email" class="form-control" id="email" placeholder="Email" required>
         </div>
         <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" ngModel name="password" class="form-control" id="password" placeholder="Password" required>
+        </div>
+        <div class="form-group">
           <label for="role">Role</label>
           <input type="text" ngModel name="role" class="form-control" id="role" placeholder="Role" required>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">Close</button>
-          <button type="submit" class="btn btn-primary" (click)="onAddAppUser(addForm.value);modal.close('Save click')">Save changes</button>
+          <button type="submit" class="btn btn-primary" (click)="onAddAppUser(addForm);modal.close('Save click')">Save changes</button>
         </div>
       </form>
     </div>
