@@ -1,4 +1,4 @@
-DELETE http://localhost:8080/ProiectTW/delete/14
+DELETE http://localhost:8080/ProiectTW/delete/21
 Accept: application/json
 
 ###
@@ -27,11 +27,23 @@ POST http://localhost:8080/ProiectTW
 Content-Type: application/json
 
 {
-  "firstName": "Admin1",
-  "lastName": "Adm2",
-  "email": "mihai.balan@admin",
+  "firstName": "Mihai",
+  "lastName": "Balan",
+  "email": "mihaibalan00@yahoo.com",
   "password": "password",
-  "appUserRole": "ADMIN"
+  "birthday": "30/07/2000",
+  "pictureURL": "https://bootdey.com/img/Content/avatar/avatar7.png",
+  "county": "Romania",
+  "college": "Faculty of Mathematics and Computer Science",
+  "phone": "0765893262",
+  "studyType": "Bachelor",
+  "specialization": "Computer Science",
+  "serialNumber": "I2797",
+  "tax": "false",
+  "CNP": "5000730204972",
+  "CI": "XD 023546",
+  "year": "3",
+  "gender": "Male",
+  "appUserRole": "STUDENT"
 }
-
 

@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgModule, OnInit} from '@angular/core';
 import { AppUser } from '../appUser';
 import { AppUserService } from '../appUser.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from "@angular/forms";
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
   templateUrl: './professor-view.component.html',
-  styleUrls: ['../app.component.css']
+  styleUrls: ['../app.component.css'],
 })
 
 export class ProfessorViewComponent implements OnInit {
@@ -22,7 +22,7 @@ export class ProfessorViewComponent implements OnInit {
   constructor(private modalService: NgbModal, private appUserService: AppUserService) {}
 
   open(content: any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-title'}).result.then((result) => {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-title', size: 'lg'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

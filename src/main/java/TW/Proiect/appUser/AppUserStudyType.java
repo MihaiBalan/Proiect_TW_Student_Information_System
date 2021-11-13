@@ -1,7 +1,7 @@
 package TW.Proiect.appUser;
 
 public enum AppUserStudyType {
-    Licenta,
+    Bachelor,
     Master,
-    Doctorat
+    Doctorate
 }

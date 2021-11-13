@@ -17,6 +17,8 @@ public interface ConfirmationTokenRepository
 
     Optional<ConfirmationToken> findByToken(String token);
 
+    ConfirmationToken findConfirmationTokenByAppUser(AppUser appUser);
+
     @Transactional
     @Modifying
     @Query("UPDATE ConfirmationToken c " +

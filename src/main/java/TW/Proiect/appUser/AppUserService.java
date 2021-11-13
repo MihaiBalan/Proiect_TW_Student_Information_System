@@ -35,17 +35,30 @@ public class AppUserService implements UserDetailsService {
     }
 
     public String signUpUser(AppUser appUser) {
-        boolean userExists = appUserRepository
-                .findByEmail(appUser.getEmail())
-                .isPresent();
 
-        if (userExists){
-            // TODO check of attributes are the same and
-            // TODO if email not confirmed send confirmation email.
+        boolean checkValue = true;
 
-            throw new IllegalStateException("email already taken");
-        }
+        if( appUserRepository.findByCNP(appUser.getCNP()).isPresent() )
+            {checkValue = false;
+            throw new IllegalStateException("User with this CNP already exists");}
 
+        else if( appUser.getAppUserRole() == AppUserRole.STUDENT && appUserRepository.findBySerialNumber(appUser.getSerialNumber()).isPresent() )
+            {checkValue = false;
+                throw new IllegalStateException("A Student with this Serial Number already exists");
+            }
+
+        else if( appUserRepository.findByPhone(appUser.getPhone()).isPresent() )
+            {checkValue = false;
+                throw new IllegalStateException("This Phone Number is already used by another user");
+            }
+        else if (appUserRepository.findByEmail(appUser.getEmail()).isPresent() )
+            {if( (LocalDateTime.now().isAfter(confirmationTokenRepository.findConfirmationTokenByAppUser(appUser).getExpiresAt())) && (confirmationTokenRepository.findConfirmationTokenByAppUser(appUser).getConfirmedAt()) == null)
+                appUserRepository.deleteAppUserById(appUser.getId());
+            else
+                {checkValue = false;
+                throw new IllegalStateException("This email is already taken");}}
+
+        if(checkValue == true){
         String encodedPassword = bCryptPasswordEncoder
                 .encode(appUser.getPassword());
 
@@ -64,7 +77,8 @@ public class AppUserService implements UserDetailsService {
 
         confirmationTokenService.saveConfirmationToken(confirmationToken);
 
-        return token;
+        return token;}
+        return null;
     }
 
     public int enableAppUser(String email) {

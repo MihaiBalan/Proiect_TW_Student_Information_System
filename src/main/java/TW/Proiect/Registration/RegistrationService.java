@@ -26,7 +26,7 @@ public class RegistrationService {
                 test(request.getEmail());
 
         if (!isValidEmail) {
-            throw new IllegalStateException("email not valid");
+            throw new IllegalStateException("Email is not valid");
         }
 
         String token = appUserService.signUpUser(
@@ -35,6 +35,19 @@ public class RegistrationService {
                         request.getLastName(),
                         request.getEmail(),
                         request.getPassword(),
+                        request.getBirthday(),
+                        request.getPictureUrl(),
+                        request.getCounty(),
+                        request.getCollege(),
+                        request.getPhone(),
+                        request.getStudyType(),
+                        request.getSpecialization(),
+                        request.getSerialNumber(),
+                        request.getTax(),
+                        request.getCNP(),
+                        request.getCI(),
+                        request.getYear(),
+                        request.getGender(),
                         request.getAppUserRole()
                 )
         );

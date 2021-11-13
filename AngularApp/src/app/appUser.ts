@@ -11,13 +11,14 @@ export interface AppUser {
   county: string;
   college: string;
   phone: string;
+  pictureURL: string;
   studyType: string;
   specialization: string;
   serialNumber: string;
   tax: boolean;
   CNP: string;
   CI: string;
-  Year: number;
+  year: number;
   gender: string;
 }
 

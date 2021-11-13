@@ -33,4 +33,10 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
     void updateAppUser(String firstname, String lastname, String email);
 
     Optional<AppUser> findAppUserById(Long id);
+    
+    Optional<Object> findByCNP(String cnp);
+
+    Optional<Object> findByPhone(String phone);
+
+    Optional<Object> findBySerialNumber(String serialNumber);
 }

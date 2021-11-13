@@ -1,9 +1,6 @@
 package TW.Proiect.appUser;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,14 +8,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 
 @Getter
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
-
 public class AppUser implements UserDetails {
 
     @SequenceGenerator(
@@ -37,7 +32,8 @@ public class AppUser implements UserDetails {
     private String lastName;
     private String email;
     private String password;
-    private Date birthday;
+    private String birthday;
+    private String pictureURL;
     private String county;
     private String college;
     private String phone;
@@ -46,7 +42,7 @@ public class AppUser implements UserDetails {
     private Boolean tax;
     private String CNP;
     private String CI;
-    private Integer Year;
+    private Integer year;
     @Enumerated(EnumType.STRING)
     private AppUserStudyType studyType;
     @Enumerated(EnumType.STRING)
@@ -56,20 +52,13 @@ public class AppUser implements UserDetails {
     private Boolean locked = false;
     private Boolean enabled = false;
 
-    public AppUser(String firstName, String lastName, String email, String password, AppUserRole appUserRole) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.appUserRole = appUserRole;
-    }
-
-    public AppUser(String firstName, String lastName, String email, String password, Date birthday, String county, String college, String phone, AppUserStudyType studyType, String specialization, String serialNumber, Boolean tax, String CNP, String CI, Integer year, AppUserGender gender, AppUserRole appUserRole) {
+    public AppUser(String firstName, String lastName, String email, String password, String birthday, String pictureURL, String county, String college, String phone, AppUserStudyType studyType, String specialization, String serialNumber, Boolean tax, String CNP, String CI, Integer year, AppUserGender gender, AppUserRole appUserRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.birthday = birthday;
+        this.pictureURL = pictureURL;
         this.county = county;
         this.college = college;
         this.phone = phone;
@@ -79,7 +68,7 @@ public class AppUser implements UserDetails {
         this.tax = tax;
         this.CNP = CNP;
         this.CI = CI;
-        Year = year;
+        this.year = year;
         this.gender = gender;
         this.appUserRole = appUserRole;
     }
@@ -90,22 +79,8 @@ public class AppUser implements UserDetails {
         return Collections.singletonList(authority);
     }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
     public String getUsername() {
-        return email;
-    }
-
-    public String getFirstName(){
-        return firstName;
-    }
-
-    public String getLastName(){
-        return lastName;
+        return this.email;
     }
 
     @Override
