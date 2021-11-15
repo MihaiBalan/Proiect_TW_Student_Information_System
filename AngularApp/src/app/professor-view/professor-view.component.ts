@@ -59,7 +59,7 @@ export class ProfessorViewComponent implements OnInit {
     this.appUserService.getAppUser(id).subscribe(
       (response: AppUser) =>{
         this.appUser = response;
-        console.log(this.appUsers);
+        console.log(this.appUser);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

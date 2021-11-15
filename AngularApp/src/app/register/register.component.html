@@ -1,1 +1,81 @@
-<h1>Register Page</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card cardbox">
+        <div class="card-header">Register</div>
+        <div class="card-body">
+          <div class="form-group">
+            <div class="col-md-5 float-left">
+
+              <form id="login-nav" method="post" role="form" class="form" accept-charset="UTF-8">
+
+                <div class="form-group">
+                  <label class="sr-only">Email</label>
+                  <input type="text" id="reg_username" name="user_name" class="form-control"
+                         value="" placeholder="Email" required>
+                </div>
+
+                <!-- password group -->
+                <div class="form-group">
+                  <!-- password label -->
+                  <label class="sr-only">Password</label>
+                  <!-- password input -->
+                  <div class="input-group">
+                    <input type="password" id="reg_userpassword" name="user_password" class="form-control" data-placement="bottom" data-toggle="popover" data-container="body"
+                           data-html="true" value="" placeholder="Password" required>
+
+                  </div>
+                </div>
+
+                <!-- password-confirm group -->
+                <div class="form-group">
+
+                  <!-- password-confirm label -->
+                  <label class="sr-only">Password Confirm</label>
+                  <!-- password-confirm input -->
+                  <div class="input-group">
+                    <input type="password" id="reg_userpasswordconfirm" class="form-control" data-placement="bottom"
+                           data-toggle="popover" data-container="body" data-html="true" placeholder="Password Confirm" required>
+
+
+                  </div>
+
+                </div>
+
+                <!-- email group -->
+                <div class="form-group">
+                  <label class="sr-only">E-mail Address</label>
+                  <input type="email" id="reg_useremail" name="user_email" class="form-control"
+                         value="" placeholder="Email Address">
+                </div>
+
+
+                <!-- Submit -->
+                <div class="form-group">
+                  <button id="reg_submit" name="submit"  value="1" class="btn btn-block btn-primary">Create user</button>
+                  <div id="sign-up-popover" class="hide"></div>
+                </div>
+
+              </form>
+
+              <div class="login-or"><hr class="hr-or"></div>
+              <!-- Links -->
+              <div class="bottom text-center">
+                Are you already registered? <a href="http://localhost:4200/login"><b>Login</b></a>
+              </div>
+            </div>
+
+
+          <div class="col-md-7 float-right">
+              Personal Info Form
+          </div>
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

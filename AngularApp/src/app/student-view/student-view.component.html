@@ -1,1 +1,210 @@
-<h1>Student-View Page</h1>
+<div class="container" id="main-container">
+
+  <!-- Navigation bar (Tabs in modal) -->
+  <ul ngbNav #nav="ngbNav" class="nav-tabs">
+    <li ngbNavItem>
+
+      <!--First Tab -->
+      <a ngbNavLink>Date Personale</a>
+      <ng-template ngbNavContent>
+
+        <div class="row">
+          <div class="col-md-4">
+            <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail" src={{appUser?.pictureURL}}>
+            <h5 class="modal-title text-center">{{appUser?.firstName}} {{appUser?.lastName}}</h5>
+          </div>
+
+          <div class="col-md-6">
+            <div class="table-responsive">
+              <table class="table table-user-information">
+                <tbody>
+                <tr>
+                  <td>
+                    <strong>
+                      CNP
+                    </strong>
+                  </td>
+                  <td>
+                    {{appUser?.cnp}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      First Name
+                    </strong>
+                  </td>
+                  <td>
+                    {{appUser?.firstName}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      Lastname
+                    </strong>
+                  </td>
+                  <td>
+                    {{appUser?.lastName}}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <strong>
+                      Birthday
+                    </strong>
+                  </td>
+                  <td>
+                    {{appUser?.birthday}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      Gender
+                    </strong>
+                  </td>
+                  <td>
+                    {{appUser?.gender}}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <strong>
+                      Email
+                    </strong>
+                  </td>
+                  <td>
+                    {{appUser?.email}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      Phone
+                    </strong>
+                  </td>
+                  <td>
+                    {{appUser?.phone}}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <strong>
+                      County
+                    </strong>
+                  </td>
+                  <td>
+                    {{appUser?.county}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      CI
+                    </strong>
+                  </td>
+                  <td>
+                    {{appUser?.ci}}
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </ng-template>
+
+    </li>
+    <li ngbNavItem>
+      <a ngbNavLink>Date Scolare</a>
+      <ng-template ngbNavContent>
+
+
+        <div class="row">
+          <div class="col-md-4">
+            <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src={{appUser?.pictureURL}}>
+            <h5 class="modal-title text-center">{{appUser?.firstName}} {{appUser?.lastName}}</h5>
+          </div>
+          <div class="col-md-6">
+            <div class="table-responsive">
+              <table class="table table-user-information">
+                <tbody>
+                <tr>
+                  <td>
+                    <strong>
+                      Serial Number
+                    </strong>
+                  </td>
+                  <td>
+                    {{appUser?.serialNumber}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      College
+                    </strong>
+                  </td>
+                  <td>
+                    {{appUser?.college}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      Specialization
+                    </strong>
+                  </td>
+                  <td>
+                    {{appUser?.specialization}}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <strong>
+                      Study Type
+                    </strong>
+                  </td>
+                  <td>
+                    {{appUser?.studyType}}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <strong>
+                      Year
+                    </strong>
+                  </td>
+                  <td>
+                    {{appUser?.year}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      Tax
+                    </strong>
+                  </td>
+                  <td>
+                    {{appUser?.tax}}
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+      </ng-template>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="nav"></div>
+</div>
