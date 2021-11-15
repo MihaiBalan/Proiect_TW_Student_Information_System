@@ -13,7 +13,7 @@ export class AppUserService{
   constructor(private http: HttpClient){ }
 
   public getAppUsers(): Observable<AppUser[]>{
-    return this.http.get<AppUser[]>(`${this.apiServerUrl}/ProiectTW/all/STUDENT`);
+    return this.http.get<AppUser[]>(`${this.apiServerUrl}/ProiectTW/all/Student`);
   }
 
   public getAppUser(appUserId: number): Observable<AppUser>{

@@ -3,12 +3,11 @@ package TW.Proiect.Registration;
 import TW.Proiect.appUser.AppUserGender;
 import TW.Proiect.appUser.AppUserRole;
 import TW.Proiect.appUser.AppUserStudyType;
+import TW.Proiect.appUser.AppUserTax;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-
-import java.net.URL;
 
 @Getter
 @AllArgsConstructor
@@ -19,7 +18,6 @@ public class RegistrationRequest {
     private final String lastName;
     private final String email;
     private final String password;
-    private final AppUserRole appUserRole;
     private final String birthday;
     private final String pictureUrl;
     private final String county;
@@ -28,9 +26,10 @@ public class RegistrationRequest {
     private final AppUserStudyType studyType;
     private final String specialization;
     private final String serialNumber;
-    private final Boolean tax;
+    private final AppUserTax tax;
     private final String CNP;
     private final String CI;
     private final Integer year;
     private final AppUserGender gender;
+    private final AppUserRole appUserRole;
 }

@@ -13,7 +13,7 @@ Content-Type: application/json
 ###
 
 ###
-GET http://localhost:8080/ProiectTW/all/STUDENT
+GET http://localhost:8080/ProiectTW/all/Student
 Accept: application/json
 
 
@@ -23,27 +23,27 @@ GET http://localhost:8080/ProiectTW/find/1
 Accept: application/json
 
 ###
-POST http://localhost:8080/ProiectTW
+POST http://localhost:8080/ProiectTW/add
 Content-Type: application/json
 
 {
-  "firstName": "Mihai",
-  "lastName": "Balan",
-  "email": "mihaibalan00@yahoo.com",
-  "password": "password",
+  "firstName": "Mihai1",
+  "lastName": "Balan1",
+  "email": "mihaibalan00@yahoo.com21",
   "birthday": "30/07/2000",
-  "pictureURL": "https://bootdey.com/img/Content/avatar/avatar7.png",
+  "password": "password",
+  "pictureURL": "https://bootdey.com/img/Content/avatar/avatar2.png",
   "county": "Romania",
   "college": "Faculty of Mathematics and Computer Science",
-  "phone": "0765893262",
+  "phone": "0765893",
   "studyType": "Bachelor",
   "specialization": "Computer Science",
-  "serialNumber": "I2797",
-  "tax": "false",
-  "CNP": "5000730204972",
-  "CI": "XD 023546",
+  "serialNumber": "I27",
+  "tax": "Tax",
+  "cnp": "5000",
+  "ci": "XD",
   "year": "3",
   "gender": "Male",
-  "appUserRole": "STUDENT"
+  "appUserRole": "Student"
 }
 

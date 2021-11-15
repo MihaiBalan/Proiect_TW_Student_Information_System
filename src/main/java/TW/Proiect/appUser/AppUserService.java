@@ -42,7 +42,7 @@ public class AppUserService implements UserDetailsService {
             {checkValue = false;
             throw new IllegalStateException("User with this CNP already exists");}
 
-        else if( appUser.getAppUserRole() == AppUserRole.STUDENT && appUserRepository.findBySerialNumber(appUser.getSerialNumber()).isPresent() )
+        else if( appUser.getAppUserRole() == AppUserRole.Student && appUserRepository.findBySerialNumber(appUser.getSerialNumber()).isPresent() )
             {checkValue = false;
                 throw new IllegalStateException("A Student with this Serial Number already exists");
             }
@@ -58,26 +58,25 @@ public class AppUserService implements UserDetailsService {
                 {checkValue = false;
                 throw new IllegalStateException("This email is already taken");}}
 
-        if(checkValue == true){
-        String encodedPassword = bCryptPasswordEncoder
-                .encode(appUser.getPassword());
+        if(checkValue){
+            String encodedPassword = bCryptPasswordEncoder
+                    .encode(appUser.getPassword());
 
-        appUser.setPassword(encodedPassword);
+            appUser.setPassword(encodedPassword);
 
-        appUserRepository.save(appUser);
+            appUserRepository.save(appUser);
 
-        String token = UUID.randomUUID().toString();
+            String token = UUID.randomUUID().toString();
 
-        ConfirmationToken confirmationToken = new ConfirmationToken(
-                token,
-                LocalDateTime.now(),
-                LocalDateTime.now().plusMinutes(15),
-                appUser
-        );
+            ConfirmationToken confirmationToken = new ConfirmationToken(
+                    token,
+                    LocalDateTime.now(),
+                    LocalDateTime.now().plusMinutes(15),
+                    appUser);
 
-        confirmationTokenService.saveConfirmationToken(confirmationToken);
+            confirmationTokenService.saveConfirmationToken(confirmationToken);
 
-        return token;}
+            return token;}
         return null;
     }
 

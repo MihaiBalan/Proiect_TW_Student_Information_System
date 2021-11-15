@@ -24,6 +24,7 @@ public class AppUser implements UserDetails {
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
+            //IDENTITY
             generator = "student_sequence"
     )
 
@@ -39,10 +40,11 @@ public class AppUser implements UserDetails {
     private String phone;
     private String specialization;
     private String serialNumber;
-    private Boolean tax;
     private String CNP;
     private String CI;
     private Integer year;
+    @Enumerated(EnumType.STRING)
+    private AppUserTax tax;
     @Enumerated(EnumType.STRING)
     private AppUserStudyType studyType;
     @Enumerated(EnumType.STRING)
@@ -52,7 +54,7 @@ public class AppUser implements UserDetails {
     private Boolean locked = false;
     private Boolean enabled = false;
 
-    public AppUser(String firstName, String lastName, String email, String password, String birthday, String pictureURL, String county, String college, String phone, AppUserStudyType studyType, String specialization, String serialNumber, Boolean tax, String CNP, String CI, Integer year, AppUserGender gender, AppUserRole appUserRole) {
+    public AppUser(String firstName, String lastName, String email, String password, String birthday, String pictureURL, String county, String college, String phone, AppUserStudyType studyType, String specialization, String serialNumber, AppUserTax tax, String CNP, String CI, Integer year, AppUserGender gender, AppUserRole appUserRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -101,5 +103,32 @@ public class AppUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    @Override
+    public String toString() {
+        return "AppUser{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", pictureURL='" + pictureURL + '\'' +
+                ", county='" + county + '\'' +
+                ", college='" + college + '\'' +
+                ", phone='" + phone + '\'' +
+                ", specialization='" + specialization + '\'' +
+                ", serialNumber='" + serialNumber + '\'' +
+                ", tax=" + tax +
+                ", CNP='" + CNP + '\'' +
+                ", CI='" + CI + '\'' +
+                ", year=" + year +
+                ", studyType=" + studyType +
+                ", gender=" + gender +
+                ", appUserRole=" + appUserRole +
+                ", locked=" + locked +
+                ", enabled=" + enabled +
+                '}';
     }
 }

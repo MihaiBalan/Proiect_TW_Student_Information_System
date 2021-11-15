@@ -16,8 +16,8 @@ export interface AppUser {
   specialization: string;
   serialNumber: string;
   tax: boolean;
-  CNP: string;
-  CI: string;
+  cnp: string;
+  ci: string;
   year: number;
   gender: string;
 }

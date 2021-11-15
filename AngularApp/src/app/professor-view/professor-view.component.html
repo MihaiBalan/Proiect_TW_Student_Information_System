@@ -1,7 +1,4 @@
-<link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
-
-<!--suppress ALL -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient">
   <span class="navbar-brand" style="color:white;">Students List</span>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -21,9 +18,9 @@
 <div class="container" id="main-container">
     <div class="row">
       <div *ngFor="let appUser of appUsers" class="col-2">
-        <button class="btn-primary tooltips" (click)="open(viewAppUserModal); onOpenModal(appUser!,'view');">
+        <button class="btn-outline-dark rounded" (click)="open(viewAppUserModal); onOpenModal(appUser!,'view');">
           <img src={{appUser?.pictureURL}} class="mr-3 float-left img-fluid rounded" alt="Avatar Image" />
-              <div class="col-12 card-title text-center badge bg-primary text-wrap text-uppercase">
+              <div class="col-12 card-title text-center badge text-wrap text-uppercase">
                 <span class="text-center">{{appUser?.firstName}}</span><br>
                 <span class="text-center">{{appUser?.lastName}}</span>
               </div>
@@ -56,7 +53,7 @@
           <input type="email" ngModel="{{editAppUser?.email}}" name="email" class="form-control" id="email" placeholder="Email">
         </div>
         <div class="form-group">
-          <label for="role">Role</label>
+          <label for="appUserRole">Role</label>
           <input type="text" ngModel="{{editAppUser?.appUserRole}}" name="appUserRole" class="form-control" id="appUserRole" placeholder="User Role">
         </div>
         <div class="modal-footer">
@@ -89,8 +86,9 @@
 <ng-template #viewAppUserModal let-modal class="modal-lg">
 
   <div class="modal-body">
-    <h5 class="modal-title" id="viewAppUserModalLabel">{{viewAppUser?.firstName}} {{viewAppUser?.lastName}}</h5>
-
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
     <!-- Navigation bar (Tabs in modal) -->
     <ul ngbNav #nav="ngbNav" class="nav-tabs">
       <li ngbNavItem>
@@ -101,8 +99,10 @@
 
             <div class="row">
               <div class="col-md-4">
-                <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src={{viewAppUser?.pictureURL}}>
+                <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail" src={{viewAppUser?.pictureURL}}>
+                <h5 class="modal-title text-center" id="viewAppUserModalLabel">{{viewAppUser?.firstName}} {{viewAppUser?.lastName}}</h5>
               </div>
+
               <div class="col-md-6">
                 <div class="table-responsive">
                   <table class="table table-user-information">
@@ -113,17 +113,17 @@
                           CNP
                         </strong>
                       </td>
-                      <td class="text-primary">
-                        {{viewAppUser?.CNP}}
+                      <td>
+                        {{viewAppUser?.cnp}}
                       </td>
                     </tr>
                     <tr>
                       <td>
                         <strong>
-                          Name
+                          First Name
                         </strong>
                       </td>
-                      <td class="text-primary">
+                      <td>
                         {{viewAppUser?.firstName}}
                       </td>
                     </tr>
@@ -133,7 +133,7 @@
                           Lastname
                         </strong>
                       </td>
-                      <td class="text-primary">
+                      <td>
                         {{viewAppUser?.lastName}}
                       </td>
                     </tr>
@@ -144,7 +144,7 @@
                           Birthday
                         </strong>
                       </td>
-                      <td class="text-primary">
+                      <td>
                         {{viewAppUser?.birthday}}
                       </td>
                     </tr>
@@ -154,7 +154,7 @@
                           Gender
                         </strong>
                       </td>
-                      <td class="text-primary">
+                      <td>
                         {{viewAppUser?.gender}}
                       </td>
                     </tr>
@@ -165,7 +165,7 @@
                           Email
                         </strong>
                       </td>
-                      <td class="text-primary">
+                      <td>
                         {{viewAppUser?.email}}
                       </td>
                     </tr>
@@ -175,7 +175,7 @@
                           Phone
                         </strong>
                       </td>
-                      <td class="text-primary">
+                      <td>
                         {{viewAppUser?.phone}}
                       </td>
                     </tr>
@@ -186,7 +186,7 @@
                           County
                         </strong>
                       </td>
-                      <td class="text-primary">
+                      <td>
                         {{viewAppUser?.county}}
                       </td>
                     </tr>
@@ -196,8 +196,8 @@
                           CI
                         </strong>
                       </td>
-                      <td class="text-primary">
-                        {{viewAppUser?.CI}}
+                      <td>
+                        {{viewAppUser?.ci}}
                       </td>
                     </tr>
                     </tbody>
@@ -217,6 +217,7 @@
           <div class="row">
             <div class="col-md-4">
               <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src={{viewAppUser?.pictureURL}}>
+              <h5 class="modal-title text-center" id="viewAppUserModalLabel">{{viewAppUser?.firstName}} {{viewAppUser?.lastName}}</h5>
             </div>
             <div class="col-md-6">
               <div class="table-responsive">
@@ -225,10 +226,10 @@
                   <tr>
                     <td>
                       <strong>
-                        Serial Numbar
+                        Serial Number
                       </strong>
                     </td>
-                    <td class="text-primary">
+                    <td>
                       {{viewAppUser?.serialNumber}}
                     </td>
                   </tr>
@@ -238,7 +239,7 @@
                         College
                       </strong>
                     </td>
-                    <td class="text-primary">
+                    <td>
                       {{viewAppUser?.college}}
                     </td>
                   </tr>
@@ -248,7 +249,7 @@
                         Specialization
                       </strong>
                     </td>
-                    <td class="text-primary">
+                    <td>
                       {{viewAppUser?.specialization}}
                     </td>
                   </tr>
@@ -259,7 +260,7 @@
                         Study Type
                       </strong>
                     </td>
-                    <td class="text-primary">
+                    <td>
                       {{viewAppUser?.studyType}}
                     </td>
                   </tr>
@@ -270,7 +271,7 @@
                         Year
                       </strong>
                     </td>
-                    <td class="text-primary">
+                    <td>
                       {{viewAppUser?.year}}
                     </td>
                   </tr>
@@ -280,11 +281,8 @@
                         Tax
                       </strong>
                     </td>
-                    <td class="text-primary">
-                      <span id="taxorbudget"></span>
-                      <script>
-                        document.getElementById("taxorbudget").innerHTML = viewAppUser?.tax ? "Tax" : "Budget";
-                      </script>
+                    <td>
+                      {{viewAppUser?.tax}}
                     </td>
                   </tr>
                   </tbody>
@@ -298,10 +296,6 @@
       </li>
     </ul>
     <div [ngbNavOutlet]="nav"></div>
-
-    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
   </div>
 
   <div class="modal-footer">
@@ -315,4 +309,3 @@
     <p>No appUsers were found.</p>
   </div>
 </div>
-
