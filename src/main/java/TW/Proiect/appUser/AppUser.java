@@ -105,30 +105,4 @@ public class AppUser implements UserDetails {
         return enabled;
     }
 
-    @Override
-    public String toString() {
-        return "AppUser{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", pictureURL='" + pictureURL + '\'' +
-                ", county='" + county + '\'' +
-                ", college='" + college + '\'' +
-                ", phone='" + phone + '\'' +
-                ", specialization='" + specialization + '\'' +
-                ", serialNumber='" + serialNumber + '\'' +
-                ", tax=" + tax +
-                ", CNP='" + CNP + '\'' +
-                ", CI='" + CI + '\'' +
-                ", year=" + year +
-                ", studyType=" + studyType +
-                ", gender=" + gender +
-                ", appUserRole=" + appUserRole +
-                ", locked=" + locked +
-                ", enabled=" + enabled +
-                '}';
-    }
 }

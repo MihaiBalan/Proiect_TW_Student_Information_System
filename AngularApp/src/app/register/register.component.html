@@ -2,13 +2,25 @@
   <div class="row">
     <div class="col-md-12">
       <div class="card cardbox">
-        <div class="card-header">Register</div>
+        <div class="card-header text-center font-weight-bold">Register</div>
         <div class="card-body">
           <div class="form-group">
-            <div class="col-md-5 float-left">
+            <form id="login-nav" method="post" role="form" class="form" accept-charset="UTF-8">
+              <div class="col-md-4 float-left">
 
-              <form id="login-nav" method="post" role="form" class="form" accept-charset="UTF-8">
+                <div style="text-align:center">
+                  <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+                  <div class="form-group">
+                    <label for="reg_img" class="form-label">Add a profile picture</label><br>
+                    <img style="width:130px; height:130px;" [src]="url" *ngIf="url">
+                    <input class="form-control" id="reg_img" type="file" (change)="selectFile($event)">
+                  </div>
+                </div>
 
+
+
+
+              <span class="text-center">Account Information</span>
                 <div class="form-group">
                   <label class="sr-only">Email</label>
                   <input type="text" id="reg_username" name="user_name" class="form-control"
@@ -49,26 +61,133 @@
                          value="" placeholder="Email Address">
                 </div>
 
-
-                <!-- Submit -->
-                <div class="form-group">
-                  <button id="reg_submit" name="submit"  value="1" class="btn btn-block btn-primary">Create user</button>
-                  <div id="sign-up-popover" class="hide"></div>
-                </div>
-
-              </form>
-
-              <div class="login-or"><hr class="hr-or"></div>
-              <!-- Links -->
-              <div class="bottom text-center">
-                Are you already registered? <a href="http://localhost:4200/login"><b>Login</b></a>
-              </div>
             </div>
 
 
-          <div class="col-md-7 float-right">
-              Personal Info Form
+          <div class="col-md-4 float-left">
+
+            <span class="text-center">Personal Information</span>
+            <div class="form-group">
+              <label class="sr-only">First Name</label>
+              <input type="text" id="reg_firstName" name="user_firstName" class="form-control"
+                     value="" placeholder="First Name">
+            </div>
+
+            <div class="form-group">
+              <label class="sr-only">Last Name</label>
+              <input type="text" id="reg_lastName" name="user_lastName" class="form-control"
+                     value="" placeholder="Last Name">
+            </div>
+
+            <div class="form-group">
+              <label class="sr-only">CNP</label>
+              <input type="text" id="reg_CNP" name="user_CNP" class="form-control"
+                     value="" placeholder="CNP">
+            </div>
+
+            <div class="form-group">
+              <label class="sr-only">CI</label>
+              <input type="text" id="reg_CI" name="user_CI" class="form-control"
+                     value="" placeholder="CI">
+            </div>
+
+            <div class="form-group">
+              <label class="sr-only">Birthday</label>
+              <input type="date" id="reg_birthday" name="user_birthday" class="form-control"
+                     value="">
+            </div>
+
+            <div class="form-group">
+              <label class="sr-only">Phone Number</label>
+              <input type="text" id="reg_phone" name="user_phone" class="form-control"
+                     value="" placeholder="Phone Number">
+            </div>
+
+            <div class="form-group">
+              <label class="sr-only">County</label>
+              <input type="text" id="reg_county" name="user_county" class="form-control"
+                     value="" placeholder="County">
+            </div>
+
+            <div class="form-group">
+              <label class="sr-only">Gender</label>
+              <select name="user_gender" id="reg_gender" class="form-control">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+
           </div>
+
+              <div *ngIf="!remover" class="col-md-4 float-right">
+
+                <span class="text-center">Study Information</span>
+                <div class="form-group">
+                  <label class="sr-only">College</label>
+                  <input type="text" id="reg_college" name="user_college" class="form-control"
+                         value="" placeholder="College">
+                </div>
+
+                <div class="form-group">
+                  <label class="sr-only">Specialization</label>
+                  <input type="text" id="reg_specialization" name="user_specialization" class="form-control"
+                         value="" placeholder="Specialization">
+                </div>
+
+                <div class="form-group">
+                  <label class="sr-only">Serial Number</label>
+                  <input type="text" id="reg_serialNumber" name="user_serialNumber" class="form-control"
+                         value="" placeholder="Serial Number">
+                </div>
+
+                <div class="form-group">
+                  <label class="sr-only">Study Type</label>
+                  <select name="user_studyType" id="reg_studyType" class="form-control">
+                    <option value="Bachelor">Bachelor</option>
+                    <option value="Master">Master</option>
+                    <option value="Doctorate">Doctorate</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="sr-only">Year</label>
+                  <input type="number" id="reg_year" name="user_year" class="form-control"
+                         value="" placeholder="Year" min="1" max="4">
+                </div>
+
+                <div class="form-group">
+                  <label class="sr-only">Tax</label>
+                  <select name="user_tax" id="reg_tax" class="form-control">
+                    <option value="Tax">Tax</option>
+                    <option value="Budget">Budget</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <input type="checkbox" id="professor_checkbox" name="professor" value="true" (change)="check_for_professor()">
+                  <label for="professor_checkbox">Are you professor?</label>
+                  <input type="password" id="reg_professor" name="user_professor" class="form-control" placeholder="Are you proffesor? Check the box!" disabled (change)="check_for_professor()">
+                </div>
+
+
+              </div>
+
+
+
+            <div class="form-group">
+              <button id="reg_submit" name="submit"  value="1" class="btn btn-block btn-primary">Create user</button>
+              <div id="sign-up-popover" class="hide"></div>
+            </div>
+
+            </form>
+
+            <div class="login-or"><hr class="hr-or"></div>
+            <!-- Links -->
+            <div class="bottom text-center">
+              Are you already registered? <a href="http://localhost:4200/login"><b>Login</b></a>
+            </div>
+
+
 
 
 
