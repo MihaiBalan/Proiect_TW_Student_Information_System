@@ -12,8 +12,8 @@ export class AppUserService{
 
   constructor(private http: HttpClient){ }
 
-  public getAppUsers(): Observable<AppUser[]>{
-    return this.http.get<AppUser[]>(`${this.apiServerUrl}/ProiectTW/all/Student`);
+  public getAppUsers(appUserRole: string): Observable<AppUser[]>{
+    return this.http.get<AppUser[]>(`${this.apiServerUrl}/ProiectTW/all/${appUserRole}`);
   }
 
   public getAppUser(appUserId: number): Observable<AppUser>{

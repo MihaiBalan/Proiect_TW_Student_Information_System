@@ -1,1 +1,341 @@
-<h1>Admin Page</h1>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient">
+  <span class="navbar-brand" style="color:white;">Users</span><br>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor02">
+
+    <form class="form-inline">
+      <input type="search" (ngModelChange)="searchAppUsers('Student',key.value)" #key="ngModel" ngModel
+              name="key" id="searchBy" class="form-control mr-sm-5" style="margin-left:10vw" placeholder="Search Student" required>
+    </form>
+    <form class="form-inline">
+      <input type="search" (ngModelChange)="searchAppUsers('Professor',key.value)" #key="ngModel" ngModel
+             name="key" id="searchBy" class="form-control" style="margin-left:35vw" placeholder="Search Professor" required>
+    </form>
+  </div>
+</nav>
+
+<div class="container" id="main-container">
+  <div class="row">
+
+      <div class="col-md-8">
+        <span>Students:</span><br>
+        <div class="row">
+          <div *ngFor="let appUser of appUserStudents" class="col-sm-2">
+            <button class="btn-outline-dark rounded" style="width: 7vw; height: 9vw;" (click)="open(viewAppUserModal); onOpenModal(appUser!,'view');">
+              <img src={{appUser?.pictureURL}} class="mr-3 float-left img-fluid rounded" alt="Avatar Image" />
+              <div class="col-12 card-title text-center badge text-wrap text-uppercase">
+                <span class="text-center">{{appUser?.firstName}}</span><br>
+                <span class="text-center">{{appUser?.lastName}}</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <span class="ml-lg-5">Professors:</span><br>
+        <div class="row">
+          <div *ngFor="let appUser of appUserProfessors" class="ml-lg-5 col-3">
+            <button class="btn-outline-dark rounded" style="width: 7vw; height: 9vw;" (click)="open(viewAppUserModal); onOpenModal(appUser!,'view');">
+              <img src={{appUser?.pictureURL}} class="mr-3 float-left img-fluid rounded" alt="Avatar Image" />
+              <div class="col-12 card-title text-center badge text-wrap text-uppercase">
+                <span class="text-center">{{appUser?.firstName}}</span><br>
+                <span class="text-center">{{appUser?.lastName}}</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+</div>
+
+<!-- Edit Modal -->
+<ng-template #updateAppUserModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="updateAppUserModalLabel">Edit AppUser{{editAppUser?.firstName}}</h5>
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #editForm="ngForm">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" ngModel="{{editAppUser?.firstName}}" name="firstName" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="FirstName">
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" ngModel="{{editAppUser?.lastName}}" name="lastName" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="LastName">
+      </div>
+      <input type="hidden" ngModel="{{editAppUser?.id}}" name="id" class="form-control" id="id" placeholder="Id">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" ngModel="{{editAppUser?.email}}" name="email" class="form-control" id="email" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <label for="appUserRole">Role</label>
+        <input type="text" ngModel="{{editAppUser?.appUserRole}}" name="appUserRole" class="form-control" id="appUserRole" placeholder="User Role">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">No</button>
+        <button class="btn btn-danger" (click)="onUpdateAppUser(editForm.value); modal.close('Save click')">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+
+<!-- Delete Modal -->
+<ng-template #deleteAppUserModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="deleteAppUserModalLabel">Delete AppUser</h5>
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete AppUser {{deleteAppUser?.firstName}} {{deleteAppUser?.lastName}}?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">No</button>
+    <button class="btn btn-danger" (click)="onDeleteAppUser(deleteAppUser?.id!); modal.close('Save click')">Yes</button>
+  </div>
+</ng-template>
+
+<!-- View Modal -->
+<ng-template #viewAppUserModal let-modal class="modal-lg">
+
+  <div class="modal-body">
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <!-- Navigation bar (Tabs in modal) -->
+    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+      <li ngbNavItem>
+
+        <!--First Tab -->
+        <a ngbNavLink>Date Personale</a>
+        <ng-template ngbNavContent>
+
+          <div class="row">
+            <div class="col-md-4">
+              <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail" src={{viewAppUser?.pictureURL}}>
+              <h5 class="modal-title text-center">{{viewAppUser?.firstName}} {{viewAppUser?.lastName}}</h5>
+            </div>
+
+            <div class="col-md-6">
+              <div class="table-responsive">
+                <table class="table table-user-information">
+                  <tbody>
+                  <tr>
+                    <td>
+                      <strong>
+                        CNP
+                      </strong>
+                    </td>
+                    <td>
+                      {{viewAppUser?.cnp}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>
+                        First Name
+                      </strong>
+                    </td>
+                    <td>
+                      {{viewAppUser?.firstName}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>
+                        Lastname
+                      </strong>
+                    </td>
+                    <td>
+                      {{viewAppUser?.lastName}}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>
+                        Birthday
+                      </strong>
+                    </td>
+                    <td>
+                      {{viewAppUser?.birthday}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>
+                        Gender
+                      </strong>
+                    </td>
+                    <td>
+                      {{viewAppUser?.gender}}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>
+                        Email
+                      </strong>
+                    </td>
+                    <td>
+                      {{viewAppUser?.email}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>
+                        Phone
+                      </strong>
+                    </td>
+                    <td>
+                      {{viewAppUser?.phone}}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>
+                        County
+                      </strong>
+                    </td>
+                    <td>
+                      {{viewAppUser?.county}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>
+                        CI
+                      </strong>
+                    </td>
+                    <td>
+                      {{viewAppUser?.ci}}
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </ng-template>
+
+      </li>
+      <li ngbNavItem>
+        <a *ngIf="viewAppUser?.appUserRole=='Student'" ngbNavLink>Date Scolare</a>
+        <ng-template ngbNavContent>
+
+
+          <div class="row">
+            <div class="col-md-4">
+              <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src={{viewAppUser?.pictureURL}}>
+              <h5 class="modal-title text-center">{{viewAppUser?.firstName}} {{viewAppUser?.lastName}}</h5>
+            </div>
+            <div class="col-md-6">
+              <div class="table-responsive">
+                <table class="table table-user-information">
+                  <tbody>
+                  <tr>
+                    <td>
+                      <strong>
+                        Serial Number
+                      </strong>
+                    </td>
+                    <td>
+                      {{viewAppUser?.serialNumber}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>
+                        College
+                      </strong>
+                    </td>
+                    <td>
+                      {{viewAppUser?.college}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>
+                        Specialization
+                      </strong>
+                    </td>
+                    <td>
+                      {{viewAppUser?.specialization}}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>
+                        Study Type
+                      </strong>
+                    </td>
+                    <td>
+                      {{viewAppUser?.studyType}}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>
+                        Year
+                      </strong>
+                    </td>
+                    <td>
+                      {{viewAppUser?.year}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>
+                        Tax
+                      </strong>
+                    </td>
+                    <td>
+                      {{viewAppUser?.tax}}
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+        </ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav"></div>
+  </div>
+
+  <div class="modal-footer">
+  </div>
+</ng-template>
+
+<!-- Notification for no appUsers -->
+<div *ngIf="appUserStudents?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">NO PROFESSORS!</h4>
+    <p>No Students were found.</p>
+  </div>
+</div>
+<div *ngIf="appUserProfessors?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">NO STUDENTS!</h4>
+    <p>No Professors were found.</p>
+  </div>
+</div>

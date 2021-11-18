@@ -27,22 +27,22 @@ POST http://localhost:8080/ProiectTW/add
 Content-Type: application/json
 
 {
-  "firstName": "Mihai1",
-  "lastName": "Balan1",
-  "email": "mihaibalan00@yahoo.com21",
+  "firstName": "Mihai12",
+  "lastName": "Balan12",
+  "email": "mihaibalan200@yahoo.com21",
   "birthday": "30/07/2000",
   "password": "password",
-  "pictureURL": "https://bootdey.com/img/Content/avatar/avatar2.png",
+  "pictureURL": "https://bootdey.com/img/Content/avatar/avatar6.png",
   "county": "Romania",
   "college": "Faculty of Mathematics and Computer Science",
-  "phone": "0765893",
+  "phone": "07658931",
   "studyType": "Bachelor",
   "specialization": "Computer Science",
-  "serialNumber": "I27",
+  "serialNumber": "I272",
   "tax": "Tax",
-  "cnp": "5000",
-  "ci": "XD",
-  "year": "3",
+  "cnp": "50004423423",
+  "ci": "XD 43242",
+  "year": "1",
   "gender": "Male",
   "appUserRole": "Student"
 }

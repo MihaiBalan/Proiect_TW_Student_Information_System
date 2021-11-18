@@ -40,11 +40,11 @@ export class ProfessorViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAppUsers();
+    this.getAppUsers("Student");
   }
 
-  public getAppUsers(): void {
-    this.appUserService.getAppUsers().subscribe(
+  public getAppUsers(role: string): void {
+    this.appUserService.getAppUsers(role).subscribe(
       (response: AppUser[]) => {
         this.appUsers = response;
         console.log(this.appUsers);
@@ -69,7 +69,7 @@ export class ProfessorViewComponent implements OnInit {
 
   public onAddAppUser(addForm: NgForm): void {
     this.appUserService.addAppUser(addForm.value);
-    this.getAppUsers();
+    this.getAppUsers("Student");
     addForm.reset();
     (error: HttpErrorResponse) => {
       alert(error.message);
@@ -81,7 +81,7 @@ export class ProfessorViewComponent implements OnInit {
     this.appUserService.updateAppUser(appUser).subscribe(
       (response: AppUser) => {
         console.log(response);
-        this.getAppUsers();
+        this.getAppUsers("Student");
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -93,7 +93,7 @@ export class ProfessorViewComponent implements OnInit {
     this.appUserService.deleteAppUser(appUserId).subscribe(
       (response: void) => {
         console.log(response);
-        this.getAppUsers();
+        this.getAppUsers("Student");
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -116,7 +116,7 @@ export class ProfessorViewComponent implements OnInit {
     }
     this.appUsers = results;
     if (results.length === 0 || !key) {
-      this.getAppUsers();
+      this.getAppUsers("Student");
     }
   }
 
