@@ -27,11 +27,6 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
     @Query("DELETE FROM AppUser a WHERE a.id = ?1")
     void deleteAppUserById(Long id);
 
-    @Transactional
-    @Modifying
-    @Query("UPDATE AppUser a SET a.firstName= ?1, a.lastName = ?2 where a.email = ?3")
-    void updateAppUser(String firstname, String lastname, String email);
-
     Optional<AppUser> findAppUserById(Long id);
     
     Optional<AppUser> findByCNP(String cnp);

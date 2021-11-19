@@ -7,11 +7,11 @@
 
     <form class="form-inline">
       <input type="search" (ngModelChange)="searchAppUsers('Student',key.value)" #key="ngModel" ngModel
-              name="key" id="searchBy" class="form-control mr-sm-5" style="margin-left:10vw" placeholder="Search Student" required>
+              name="key" id="searchStudentBy" class="form-control mr-sm-5" style="margin-left:10vw" placeholder="Search Student" required>
     </form>
     <form class="form-inline">
       <input type="search" (ngModelChange)="searchAppUsers('Professor',key.value)" #key="ngModel" ngModel
-             name="key" id="searchBy" class="form-control" style="margin-left:35vw" placeholder="Search Professor" required>
+             name="key" id="searchProfessorBy" class="form-control" style="margin-left:35vw" placeholder="Search Professor" required>
     </form>
   </div>
 </nav>
@@ -53,10 +53,86 @@
 
 </div>
 
-<!-- Edit Modal -->
-<ng-template #updateAppUserModal let-modal>
+<!-- Edit Personal Info Modal -->
+<ng-template #updatePersonalModal let-modal>
   <div class="modal-header">
-    <h5 class="modal-title" id="updateAppUserModalLabel">Edit AppUser{{editAppUser?.firstName}}</h5>
+    <h5 class="modal-title" id="updatePersonalModalLabel">Edit {{editAppUser?.appUserRole}} {{editAppUser?.lastName}}'s Personal Info</h5>
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #editForm="ngForm">
+      <div class="row">
+        <div class="col-6">
+
+          <div style="text-align:center">
+            <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+            <div class="form-group">
+              <label for="img_edit" class="form-label">Profile Picture</label><br>
+              <img style="width:130px; height:130px;" [src]="url" *ngIf="url">
+              <img style="width:130px; height:130px;" [src]="editAppUser?.pictureURL" *ngIf="!url">
+              <input  class="form-control" id="img_edit" type="file" (change)="selectFile($event)">
+            </div>
+          </div>
+
+      <div class="form-group">
+        <label for="cnp_edit">CNP</label>
+        <input type="text" ngModel="{{editAppUser?.cnp}}" name="cnp_edit" class="form-control" id="cnp_edit">
+      </div>
+      <div class="form-group">
+        <label for="firstName_edit">First Name</label>
+        <input type="text" name="firstName_edit" class="form-control" id="firstName_edit" ngModel="{{editAppUser?.firstName}}">
+      </div>
+      <div class="form-group">
+        <label for="lastName_edit">Last Name</label>
+        <input type="text" name="lastName_edit" class="form-control" id="lastName_edit" ngModel="{{editAppUser?.lastName}}">
+      </div>
+        </div>
+        <div class="col-6">
+      <div class="form-group">
+        <label for="birthday_edit">Birthday</label>
+        <input type="date" id="birthday_edit" name="birthday_edit" class="form-control" ngModel="{{editAppUser?.birthday}}">
+      </div>
+      <div class="form-group">
+        <label for="gender_edit">Gender</label>
+        <select name="gender_edit" id="gender_edit" class="form-control" ngModel="{{editAppUser?.gender}}">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="email_edit">E-mail Address</label>
+        <input type="email" id="email_edit" name="email_edit" class="form-control" ngModel="{{editAppUser?.email}}">
+      </div>
+      <div class="form-group">
+        <label for="phone_edit">Phone Number</label>
+        <input type="text" id="phone_edit" name="phone_edit" class="form-control" ngModel="{{editAppUser?.phone}}">
+      </div>
+      <div class="form-group">
+        <label for="county_edit">County</label>
+        <input type="text" id="county_edit" name="county_edit" class="form-control" ngModel="{{editAppUser?.county}}">
+      </div>
+      <div class="form-group">
+        <label for="ci_edit">CI</label>
+        <input type="text" id="ci_edit" name="ci_edit" class="form-control" ngModel="{{editAppUser?.ci}}">
+      </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">No</button>
+        <button class="btn btn-danger" (click)="onUpdateAppUser(editForm.value); modal.close('Save click')">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+
+<!-- Edit Studying Info Modal -->
+<ng-template #updateStudyInfoModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="updateStudyModalLabel">Edit {{editAppUser?.appUserRole}} {{editAppUser?.lastName}}'s Study Info</h5>
     <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -64,21 +140,35 @@
   <div class="modal-body">
     <form #editForm="ngForm">
       <div class="form-group">
-        <label for="firstName">First Name</label>
-        <input type="text" ngModel="{{editAppUser?.firstName}}" name="firstName" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="FirstName">
+        <label for="serialNumber_edit">Serial Number</label>
+        <input type="text" name="serialNumber_edit" class="form-control" id="serialNumber_edit" ngModel="{{editAppUser?.serialNumber}}">
       </div>
       <div class="form-group">
-        <label for="lastName">Last Name</label>
-        <input type="text" ngModel="{{editAppUser?.lastName}}" name="lastName" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="LastName">
-      </div>
-      <input type="hidden" ngModel="{{editAppUser?.id}}" name="id" class="form-control" id="id" placeholder="Id">
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" ngModel="{{editAppUser?.email}}" name="email" class="form-control" id="email" placeholder="Email">
+        <label for="college_edit">College</label>
+        <input type="text" name="college_edit" class="form-control" id="college_edit" ngModel="{{editAppUser?.college}}">
       </div>
       <div class="form-group">
-        <label for="appUserRole">Role</label>
-        <input type="text" ngModel="{{editAppUser?.appUserRole}}" name="appUserRole" class="form-control" id="appUserRole" placeholder="User Role">
+        <label for="specialization_edit">Specialization</label>
+        <input type="text" name="specialization_edit" class="form-control" id="specialization_edit" ngModel="{{editAppUser?.specialization}}">
+      </div>
+      <div class="form-group">
+        <label for="studyType_edit">Study Type</label>
+        <select name="studyType_edit" id="studyType_edit" class="form-control" ngModel="{{editAppUser?.studyType}}">
+          <option value="Bachelor">Bachelor</option>
+          <option value="Master">Master</option>
+          <option value="Doctorate">Doctorate</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="year_edit">Year</label>
+        <input type="number" id="year_edit" name="year_edit" class="form-control" ngModel="{{editAppUser?.year}}" min="1" max="4">
+      </div>
+      <div class="form-group">
+        <label class="tax_edit">Tax</label>
+        <select name="tax_edit" id="tax_edit" class="form-control" ngModel="{{editAppUser?.tax}}">
+          <option value="Tax">Tax</option>
+          <option value="Budget">Budget</option>
+        </select>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">No</button>
@@ -92,17 +182,17 @@
 <!-- Delete Modal -->
 <ng-template #deleteAppUserModal let-modal>
   <div class="modal-header">
-    <h5 class="modal-title" id="deleteAppUserModalLabel">Delete AppUser</h5>
+    <h5 class="modal-title" id="deleteAppUserModalLabel">Delete {{deleteAppUser?.appUserRole}}</h5>
     <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <p>Are you sure you want to delete AppUser {{deleteAppUser?.firstName}} {{deleteAppUser?.lastName}}?</p>
+    <p>Are you sure you want to delete {{deleteAppUser?.appUserRole}}: {{deleteAppUser?.firstName}} {{deleteAppUser?.lastName}}?</p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">No</button>
-    <button class="btn btn-danger" (click)="onDeleteAppUser(deleteAppUser?.id!); modal.close('Save click')">Yes</button>
+    <button class="btn btn-danger" (click)="onDeleteAppUser(deleteAppUser?.id!); modal.close('Save click');">Yes</button>
   </div>
 </ng-template>
 
@@ -118,7 +208,7 @@
       <li ngbNavItem>
 
         <!--First Tab -->
-        <a ngbNavLink>Date Personale</a>
+        <a ngbNavLink>Personal Information</a>
         <ng-template ngbNavContent>
 
           <div class="row">
@@ -229,12 +319,15 @@
               </div>
             </div>
           </div>
-
+          <div class="float-right btn-group btn-group-sm">
+            <button class="btn btn-primary tooltips" (click)="open(updatePersonalModal); onOpenModal(viewAppUser!,'edit'); modal.close('Save click');"><i class="fa fa-pencil"></i> </button>
+            <button class="btn btn-secondary tooltips" (click)="open(deleteAppUserModal); onOpenModal(viewAppUser!,'delete'); modal.close('Save click');"><i class="fa fa-times"></i> </button>
+          </div>
         </ng-template>
 
       </li>
       <li ngbNavItem>
-        <a *ngIf="viewAppUser?.appUserRole=='Student'" ngbNavLink>Date Scolare</a>
+        <a *ngIf="viewAppUser?.appUserRole=='Student'" ngbNavLink>Studying Information</a>
         <ng-template ngbNavContent>
 
 
@@ -314,7 +407,10 @@
               </div>
             </div>
           </div>
-
+          <div class="float-right btn-group btn-group-sm">
+            <button class="btn btn-primary tooltips" (click)="open(updateStudyInfoModal); onOpenModal(viewAppUser!,'edit'); modal.close('Save click');"><i class="fa fa-pencil"></i> </button>
+            <button class="btn btn-secondary tooltips" (click)="open(deleteAppUserModal); onOpenModal(viewAppUser!,'delete'); modal.close('Save click');" ><i class="fa fa-times"></i> </button>
+          </div>
 
         </ng-template>
       </li>

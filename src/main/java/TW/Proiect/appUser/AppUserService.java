@@ -93,8 +93,7 @@ public class AppUserService implements UserDetailsService {
     }
 
     public AppUser updateAppUser(AppUser user){
-        appUserRepository.updateAppUser(user.getFirstName(), user.getLastName(), user.getEmail());
-        return user;
+        return appUserRepository.save(user);
     }
 
     public void deleteUser(Long id){
