@@ -5,24 +5,32 @@
         <img class="img-home img-thumbnail" style="width:300px; height:300px;" src="https://st3.depositphotos.com/4111759/13425/v/380/depositphotos_134255634-stock-illustration-avatar-icon-male-profile-gray.jpg">
       </div>
       <div class="col-md-7 form-content">
-        <h1 class="title">Sign In</h1>
+        <h1 style="font-family: 'Times New Roman';font-size: 45px; font-weight: bold" class="title">Sign In</h1>
         <form #loginForm="ngForm" class="form-horizontal" role="form">
           <div class="form-group">
-            <label for="email" class="col-sm-2 control-label">Email</label>
+            <label id="login_page_style" for="email" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
-              <input type="email" class="form-control" id="email" name="email" placeholder="Email"  ngModel>
+              <input style="border: 2px solid white;
+              border-radius: 12px;
+              padding: 5px;"
+                     type="email" class="form-control" id="email" name="email" placeholder="Email"  ngModel>
             </div>
           </div>
           <div class="form-group">
-            <label for="password" class="col-sm-2 control-label">Password</label>
+            <label id="login_page_style" for="password" class="col-sm-2 control-label">Password</label>
             <div class="col-sm-10">
-              <input type="password" class="form-control" id="password" name="password" placeholder="Password"  ngModel>
+              <input style="border: 2px solid white;
+               border-radius: 12px;
+               padding: 5px;"
+                     type="password" class="form-control" id="password" name="password" placeholder="Password"  ngModel>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" (click)="checkLogin(loginForm.value.email, loginForm.value.password)"  class="btn btn-outline-dark">Sign in</button>
-              <a class="btn btn-outline-dark float-right" href="http://localhost:4200/register"> Register</a>
+             <button id="signin_btn" type="submit" (click)="checkLogin(loginForm.value.email, loginForm.value.password)"  class="btn btn-outline-dark">
+                Sign in
+              </button>
+              <a id="signin_btn" class="btn btn-outline-dark float-right" href="http://localhost:4200/register"> Register</a>
             </div>
           </div>
         </form>

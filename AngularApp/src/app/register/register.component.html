@@ -1,3 +1,9 @@
+<style>
+  border-radius: 12px;
+  padding: 5px;
+  font-size: 16px;
+</style>
+
 <div class="container">
   <div class="row">
     <div class="col-md-12">
@@ -11,13 +17,13 @@
                 <div style="text-align:center">
                   <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
                   <div class="form-group">
-                    <label for="reg_img" class="form-label">Add a profile picture</label><br>
+                    <label id="scrisul_din_register" for="reg_img" class="form-label">Add a profile picture</label><br>
                     <img style="width:130px; height:130px;" [src]="url" *ngIf="url">
                     <input class="form-control" id="reg_img" type="file" (change)="selectFile($event)">
                   </div>
                 </div>
 
-              <span class="text-center">Account Information</span>
+              <span id="scrisul_din_register" class="text-center">Account Information</span>
                 <div class="form-group">
                   <label class="sr-only">Email</label>
                   <input type="text" id="reg_username" name="user_name" class="form-control"
@@ -53,7 +59,7 @@
 
                 <!-- email group -->
                 <div class="form-group">
-                  <label class="sr-only">E-mail Address</label>
+                  <label  class="sr-only">E-mail Address</label>
                   <input type="email" id="reg_useremail" name="user_email" class="form-control"
                          value="" placeholder="Email Address">
                 </div>
@@ -63,7 +69,7 @@
 
           <div class="col-md-4 float-left">
 
-            <span class="text-center">Personal Information</span>
+            <span id="scrisul_din_register" class="text-center">Personal Information</span>
             <div class="form-group">
               <label class="sr-only">First Name</label>
               <input type="text" id="reg_firstName" name="user_firstName" class="form-control"
@@ -118,7 +124,7 @@
 
               <div *ngIf="!remover" class="col-md-4 float-right">
 
-                <span class="text-center">Study Information</span>
+                <span id="scrisul_din_register" class="text-center">Study Information</span>
                 <div class="form-group">
                   <label class="sr-only">College</label>
                   <input type="text" id="reg_college" name="user_college" class="form-control"
@@ -162,7 +168,7 @@
 
                 <div class="form-group">
                   <input type="checkbox" id="professor_checkbox" name="professor" value="true" (change)="check_for_professor()">
-                  <label for="professor_checkbox">Are you professor?</label>
+                  <label id="scrisul_din_register" for="professor_checkbox">Are you professor?</label>
                   <input type="password" id="reg_professor" name="user_professor" class="form-control" placeholder="Are you proffesor? Check the box!" disabled (change)="check_for_professor()">
                 </div>
 
