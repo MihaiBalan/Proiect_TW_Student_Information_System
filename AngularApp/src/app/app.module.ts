@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { appRoutingModule } from "./app.routing";
-import { HomeComponent } from "./home";
 import { LoginComponent } from "./login";
 import { RegisterComponent } from "./register";
 import { StudentViewComponent } from "./student-view";
@@ -12,16 +11,14 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { HttpClientModule } from "@angular/common/http";
 import { AdminViewComponent } from "./admin-view";
 
-
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     LoginComponent,
     RegisterComponent,
     StudentViewComponent,
     ProfessorViewComponent,
-    AdminViewComponent
+    AdminViewComponent,
   ],
   imports: [
     BrowserModule,

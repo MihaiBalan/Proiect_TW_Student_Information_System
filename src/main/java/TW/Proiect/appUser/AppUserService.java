@@ -101,8 +101,15 @@ public class AppUserService implements UserDetailsService {
         appUserRepository.deleteAppUserById(id);
     }
 
-    public AppUser findUserById(Long id){
-        return appUserRepository.findAppUserById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found"));
+    public AppUser findAppUserById(Long id){
+        return appUserRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found"));
     }
 
+    public AppUser findAppUserByEmail(String email) {
+        return appUserRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("User by email " + email + " was not found"));
+    }
+
+    public String cryptPassword(String password) {
+        return bCryptPasswordEncoder.encode(password);
+    }
 }

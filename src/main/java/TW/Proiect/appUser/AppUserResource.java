@@ -24,10 +24,22 @@ public class AppUserResource {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @GetMapping("/find/{id}")
-    public ResponseEntity<AppUser> getUserById (@PathVariable("id") Long id) {
-        AppUser user = appUserService.findUserById(id);
+    @GetMapping("/findById/{id}")
+    public ResponseEntity<AppUser> getAppUserById (@PathVariable("id") Long id) {
+        AppUser user = appUserService.findAppUserById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @GetMapping("/findByEmail/{email}")
+    public ResponseEntity<AppUser> getAppUserByEmail (@PathVariable("email") String email) {
+        AppUser user = appUserService.findAppUserByEmail(email);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @GetMapping("/cryptPass/{password}")
+    public ResponseEntity<String> cryptPassword (@PathVariable("password") String password) {
+        String cryptedPass = appUserService.cryptPassword(password);
+        return new ResponseEntity<>(cryptedPass, HttpStatus.OK);
     }
 
     @PostMapping("/add")

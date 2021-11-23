@@ -13,8 +13,9 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
 
-    Optional<AppUser> findByEmail(String email);
     List<AppUser> findByAppUserRole(AppUserRole role);
+
+    Optional<AppUser> findByEmail(String email);
 
     @Transactional
     @Modifying
@@ -27,11 +28,11 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
     @Query("DELETE FROM AppUser a WHERE a.id = ?1")
     void deleteAppUserById(Long id);
 
-    Optional<AppUser> findAppUserById(Long id);
-    
-    Optional<AppUser> findByCNP(String cnp);
+    Optional<AppUser> findById(Long id);
 
-    Optional<AppUser> findByPhone(String phone);
+    Optional<Object> findByCNP(String cnp);
 
-    Optional<AppUser> findBySerialNumber(String serialNumber);
+    Optional<Object> findBySerialNumber(String serialNumber);
+
+    Optional<Object> findByPhone(String phone);
 }

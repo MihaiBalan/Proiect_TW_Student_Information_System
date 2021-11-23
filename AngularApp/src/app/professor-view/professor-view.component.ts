@@ -1,4 +1,4 @@
-import {Component, NgModule, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { AppUser } from '../appUser';
 import { AppUserService } from '../appUser.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -56,7 +56,7 @@ export class ProfessorViewComponent implements OnInit {
   }
 
   public getAppUser(id: number): void{
-    this.appUserService.getAppUser(id).subscribe(
+    this.appUserService.getAppUserById(id).subscribe(
       (response: AppUser) =>{
         this.appUser = response;
         console.log(this.appUser);
