@@ -23,9 +23,9 @@
         <span>Students:</span><br>
         <div class="row">
           <div *ngFor="let appUser of appUserStudents" class="col-sm-2">
-            <button class="btn-outline-dark rounded" style="width: 7vw; height: 9vw;" (click)="open(viewAppUserModal); onOpenModal(appUser!,'view');">
-              <img src={{appUser?.pictureURL}} class="mr-3 float-left img-fluid rounded" alt="Avatar Image" />
-              <div class="col-12 card-title text-center badge text-wrap text-uppercase">
+            <button class="btn-outline-dark rounded" style="width: 7vw; height: 7vw;" (click)="open(viewAppUserModal); onOpenModal(appUser!,'view');">
+              <img src={{appUser?.pictureURL}} style="width:100%" class="mr-3 float-left img-fluid rounded" alt="Avatar Image" />
+              <div style="font-size: 0.8vw;" class="col-12 card-title text-center badge text-wrap text-uppercase">
                 <span class="text-center">{{appUser?.firstName}}</span><br>
                 <span class="text-center">{{appUser?.lastName}}</span>
               </div>
@@ -38,9 +38,9 @@
         <span class="ml-lg-5">Professors:</span><br>
         <div class="row">
           <div *ngFor="let appUser of appUserProfessors" class="ml-lg-5 col-3">
-            <button class="btn-outline-dark rounded" style="width: 7vw; height: 9vw;" (click)="open(viewAppUserModal); onOpenModal(appUser!,'view');">
-              <img src={{appUser?.pictureURL}} class="mr-3 float-left img-fluid rounded" alt="Avatar Image" />
-              <div class="col-12 card-title text-center badge text-wrap text-uppercase">
+            <button class="btn-outline-dark rounded" style="width: 7vw; height: 7vw;" (click)="open(viewAppUserModal); onOpenModal(appUser!,'view');">
+              <img src={{appUser?.pictureURL}} style="width:100%" class="mr-3 float-left img-fluid rounded" alt="Avatar Image" />
+              <div style="font-size: 0.8vw;" class="col-12 card-title text-center badge text-wrap text-uppercase">
                 <span class="text-center">{{appUser?.firstName}}</span><br>
                 <span class="text-center">{{appUser?.lastName}}</span>
               </div>
@@ -208,7 +208,7 @@
       <li ngbNavItem>
 
         <!--First Tab -->
-        <a ngbNavLink>Personal Information</a>
+        <a class="btn-outline-secondary" ngbNavLink>Personal Information</a>
         <ng-template ngbNavContent>
 
           <div class="row">
@@ -320,14 +320,14 @@
             </div>
           </div>
           <div class="float-right btn-group btn-group-sm">
-            <button class="btn btn-primary tooltips" (click)="open(updatePersonalModal); onOpenModal(viewAppUser!,'edit'); modal.close('Save click');"><i class="fa fa-pencil"></i> </button>
-            <button class="btn btn-secondary tooltips" (click)="open(deleteAppUserModal); onOpenModal(viewAppUser!,'delete'); modal.close('Save click');"><i class="fa fa-times"></i> </button>
+            <button class="btn btn-secondary tooltips" (click)="open(updatePersonalModal); onOpenModal(viewAppUser!,'edit'); modal.close('Save click');"><i class="fa fa-pencil"></i> </button>
+            <button class="btn btn-danger tooltips" (click)="open(deleteAppUserModal); onOpenModal(viewAppUser!,'delete'); modal.close('Save click');"><i class="fa fa-times"></i> </button>
           </div>
         </ng-template>
 
       </li>
       <li ngbNavItem>
-        <a *ngIf="viewAppUser?.appUserRole=='Student'" ngbNavLink>Studying Information</a>
+        <a  class="btn-outline-secondary" *ngIf="viewAppUser?.appUserRole=='Student'" ngbNavLink>Studying Information</a>
         <ng-template ngbNavContent>
 
 
@@ -408,8 +408,8 @@
             </div>
           </div>
           <div class="float-right btn-group btn-group-sm">
-            <button class="btn btn-primary tooltips" (click)="open(updateStudyInfoModal); onOpenModal(viewAppUser!,'edit'); modal.close('Save click');"><i class="fa fa-pencil"></i> </button>
-            <button class="btn btn-secondary tooltips" (click)="open(deleteAppUserModal); onOpenModal(viewAppUser!,'delete'); modal.close('Save click');" ><i class="fa fa-times"></i> </button>
+            <button class="btn btn-secondary tooltips" (click)="open(updateStudyInfoModal); onOpenModal(viewAppUser!,'edit'); modal.close('Save click');"><i class="fa fa-pencil"></i> </button>
+            <button class="btn btn-danger tooltips" (click)="open(deleteAppUserModal); onOpenModal(viewAppUser!,'delete'); modal.close('Save click');" ><i class="fa fa-times"></i> </button>
           </div>
 
         </ng-template>
