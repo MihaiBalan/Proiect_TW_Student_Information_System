@@ -10,7 +10,7 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input type="search" (ngModelChange)="searchAppUsers(key.value)" #key="ngModel" ngModel
-             name="key" id="searchFirstName" class="form-control mr-sm-5" placeholder="Search student by name" required>
+             name="key" id="searchFirstName" class="form-control" style="width:14vw; margin-right:3vw;" placeholder="Search student by name" required>
     </form>
   </div>
 </nav>
@@ -18,9 +18,9 @@
 <div class="container" id="main-container">
     <div class="row">
       <div *ngFor="let appUser of appUsers" class="col-2">
-        <button class="btn-outline-dark rounded" (click)="open(viewAppUserModal); onOpenModal(appUser!,'view');">
-          <img src={{appUser?.pictureURL}} class="mr-3 float-left img-fluid rounded" alt="Avatar Image" />
-              <div class="col-12 card-title text-center badge text-wrap text-uppercase">
+        <button class="btn-outline-dark rounded" style="width:10vw; height:10vw;" (click)="open(viewAppUserModal); onOpenModal(appUser!,'view');">
+          <img src={{appUser?.pictureURL}} style="width:100%" class="mr-3 float-left img-fluid rounded" alt="Avatar Image" />
+              <div class="col-12 card-title text-center badge text-wrap text-uppercase" style="font-size: 0.8vw;">
                 <span class="text-center">{{appUser?.firstName}}</span><br>
                 <span class="text-center">{{appUser?.lastName}}</span>
               </div>
@@ -94,7 +94,7 @@
       <li ngbNavItem>
 
         <!--First Tab -->
-        <a ngbNavLink>Personal Information</a>
+        <a  class="btn-outline-secondary" ngbNavLink>Personal Information</a>
         <ng-template ngbNavContent>
 
             <div class="row">
@@ -210,7 +210,7 @@
 
       </li>
       <li ngbNavItem>
-        <a ngbNavLink>Studying Information</a>
+        <a  class="btn-outline-secondary" ngbNavLink>Studying Information</a>
         <ng-template ngbNavContent>
 
 
