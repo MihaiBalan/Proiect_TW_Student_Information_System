@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient">
   <span class="navbar-brand" style="color:white;">Students List</span>
+  <a id="signin_btn" class="btn btn-outline-dark float-right" href="http://localhost:4200/student-view"> Personal Profile View</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -18,7 +19,7 @@
 <div class="container" id="main-container">
     <div class="row">
       <div *ngFor="let appUser of appUsers" class="col-2">
-        <button class="btn-outline-dark rounded" style="width:10vw; height:10vw;" (click)="open(viewAppUserModal); onOpenModal(appUser!,'view');">
+        <button class="btn-outline-dark rounded" style="width:10vw; height:12vw;" (click)="open(viewAppUserModal); onOpenModal(appUser!,'view');">
           <img src={{appUser?.pictureURL}} style="width:100%" class="mr-3 float-left img-fluid rounded" alt="Avatar Image" />
               <div class="col-12 card-title text-center badge text-wrap text-uppercase" style="font-size: 0.8vw;">
                 <span class="text-center">{{appUser?.firstName}}</span><br>

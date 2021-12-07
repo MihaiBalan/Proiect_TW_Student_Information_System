@@ -36,17 +36,11 @@ public class AppUserResource {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @GetMapping("/cryptPass/{password}")
+   /* @GetMapping("/cryptPass/{password}")
     public ResponseEntity<String> cryptPassword (@PathVariable("password") String password) {
         String cryptedPass = appUserService.cryptPassword(password);
         return new ResponseEntity<>(cryptedPass, HttpStatus.OK);
-    }
-
-    @PostMapping("/add")
-    public ResponseEntity<AppUser> addUser(@RequestBody AppUser user){
-        AppUser newUser = appUserService.addUser(user);
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
-    }
+    } */
 
     @PutMapping("/update")
     public ResponseEntity<AppUser> updateUser(@RequestBody AppUser user){

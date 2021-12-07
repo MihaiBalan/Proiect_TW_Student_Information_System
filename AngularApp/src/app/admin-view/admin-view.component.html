@@ -23,7 +23,7 @@
         <span>Students:</span><br>
         <div class="row">
           <div *ngFor="let appUser of appUserStudents" class="col-sm-2">
-            <button class="btn-outline-dark rounded" style="width: 7vw; height: 7vw;" (click)="open(viewAppUserModal); onOpenModal(appUser!,'view');">
+            <button class="btn-outline-dark rounded" style="width: 7vw; height: 9vw;" (click)="open(viewAppUserModal); onOpenModal(appUser!,'view');">
               <img src={{appUser?.pictureURL}} style="width:100%" class="mr-3 float-left img-fluid rounded" alt="Avatar Image" />
               <div style="font-size: 0.8vw;" class="col-12 card-title text-center badge text-wrap text-uppercase">
                 <span class="text-center">{{appUser?.firstName}}</span><br>
@@ -38,7 +38,7 @@
         <span class="ml-lg-5">Professors:</span><br>
         <div class="row">
           <div *ngFor="let appUser of appUserProfessors" class="ml-lg-5 col-3">
-            <button class="btn-outline-dark rounded" style="width: 7vw; height: 7vw;" (click)="open(viewAppUserModal); onOpenModal(appUser!,'view');">
+            <button class="btn-outline-dark rounded" style="width: 7vw; height: 9vw;" (click)="open(viewAppUserModal); onOpenModal(appUser!,'view');">
               <img src={{appUser?.pictureURL}} style="width:100%" class="mr-3 float-left img-fluid rounded" alt="Avatar Image" />
               <div style="font-size: 0.8vw;" class="col-12 card-title text-center badge text-wrap text-uppercase">
                 <span class="text-center">{{appUser?.firstName}}</span><br>

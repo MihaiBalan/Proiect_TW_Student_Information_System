@@ -13,12 +13,12 @@ export class StudentViewComponent implements OnInit {
   constructor(private appUserService: AppUserService, private authenticationService: AuthenticationService) {}
 
   ngOnInit() {
-    //TODO: Get the current logged in user
-    this.getAppUserById(2);
+    this.getAppUserByEmail(this.authenticationService.appUser?.email);
   }
 
-  public getAppUserById(id: number): void{
-      this.appUserService.getAppUserById(id).subscribe(
+  public getAppUserByEmail(email: string | undefined): void{
+      if(email!=null)
+      {this.appUserService.getAppUserByEmail(email).subscribe(
         (response: AppUser) =>{
           this.appUser = response;
           console.log(this.appUser);
@@ -26,6 +26,6 @@ export class StudentViewComponent implements OnInit {
         (error: HttpErrorResponse) => {
           alert(error.message);
         }
-      );}
+      );}}
 
 }

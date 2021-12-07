@@ -6,24 +6,33 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
 
   invalidLogin: boolean = false;
-  password: string = "";
-  email: string = "";
+  authRouteVals: number = 10;
 
   constructor(private router: Router,
-              public loginService: AuthenticationService) { }
+              public loginService: AuthenticationService) {
+  }
 
   ngOnInit() {
   }
 
+
   checkLogin(email: string, password: string) {
-    this.email = email;
-    this.password = password;
-    if (this.loginService.authenticate(this.email, this.password)
-    ) {
-      this.router.navigate([''])
-      this.invalidLogin = false
-    } else
-      this.invalidLogin = true
+    this.authRouteVals = this.loginService.authenticate(email, password);
+    if(this.authRouteVals == 10)
+        setTimeout(() => {
+          this.checkLogin(email,password);
+        }, 2000);
+
+      else if (this.authRouteVals == 0) {
+        this.invalidLogin = true;
+      } else {
+        if (this.authRouteVals == 1)
+          this.router.navigate(['student-view']);
+        else if (this.authRouteVals == 2)
+          this.router.navigate(['professor-view']);
+        else if (this.authRouteVals == 3)
+          this.router.navigate(['admin-view']);
+      }
   }
 
 }
