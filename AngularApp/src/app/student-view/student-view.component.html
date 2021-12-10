@@ -121,7 +121,7 @@
 
     </li>
     <li ngbNavItem>
-      <a  class="btn-outline-secondary" ngbNavLink>Studying Information</a>
+      <a  class="btn-outline-secondary" *ngIf="appUser?.appUserRole=='Student'" ngbNavLink>Studying Information</a>
       <ng-template ngbNavContent>
 
 
