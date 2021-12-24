@@ -3,6 +3,8 @@ import { AppUser } from '../appUser';
 import { AppUserService } from '../appUser.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import {NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import {AuthenticationService} from "../services/authentication.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -18,8 +20,9 @@ export class AdminViewComponent implements OnInit {
   public deleteAppUser: AppUser | undefined;
   public viewAppUser: AppUser | undefined;
   closeResult: string | undefined;
+  public loggedInUser: Observable<AppUser> | undefined;
 
-  constructor(private modalService: NgbModal, private appUserService: AppUserService) {}
+  constructor(private modalService: NgbModal, private appUserService: AppUserService, public authenticationService: AuthenticationService) {}
 
   open(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-title', size: 'lg'}).result.then((result) => {
@@ -42,6 +45,7 @@ export class AdminViewComponent implements OnInit {
   ngOnInit() {
     this.getAppUsers("Professor");
     this.getAppUsers("Student");
+    this.loggedInUser=this.appUserService.getAppUserByEmail(sessionStorage.getItem('username'));
   }
 
   public getAppUsers(role: string): void {
@@ -72,7 +76,7 @@ export class AdminViewComponent implements OnInit {
     );
   }
 
-  public onUpdateAppUser(appUser: AppUser): void {
+  public onUpdateAppUser(appUser: AppUser | undefined): void {
     this.appUserService.updateAppUser(appUser).subscribe(
       (response: AppUser) => {
         console.log(response);

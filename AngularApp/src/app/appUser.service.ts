@@ -20,7 +20,7 @@ export class AppUserService{
     return this.http.get<AppUser>(`${this.apiServerUrl}/ProiectTW/findById/${appUserId}`);
   }
 
-  public getAppUserByEmail(appUserEmail: string): Observable<AppUser>{
+  public getAppUserByEmail(appUserEmail: string | null): Observable<AppUser>{
     return this.http.get<AppUser>(`${this.apiServerUrl}/ProiectTW/findByEmail/${appUserEmail}`);
   }
 
@@ -28,7 +28,7 @@ export class AppUserService{
     return this.http.post<AppUser>(`${this.apiServerUrl}/ProiectTW/add`,appUser);
   }
 
-  public updateAppUser(appUser: AppUser): Observable<AppUser>{
+  public updateAppUser(appUser: AppUser | undefined): Observable<AppUser>{
     return this.http.put<AppUser>(`${this.apiServerUrl}/ProiectTW/update`, appUser);
   }
 

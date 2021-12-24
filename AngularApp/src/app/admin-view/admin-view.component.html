@@ -9,11 +9,13 @@
       <input type="search" (ngModelChange)="searchAppUsers('Student',key.value)" #key="ngModel" ngModel
               name="key" id="searchStudentBy" class="form-control mr-sm-5" style="margin-left:10vw" placeholder="Search Student" required>
     </form>
+    <a id="signin_btn" class="btn btn-outline-dark float-right" style="margin-left:7vw" href="http://localhost:4200/student-view"> Personal Profile View</a>
     <form class="form-inline">
       <input type="search" (ngModelChange)="searchAppUsers('Professor',key.value)" #key="ngModel" ngModel
-             name="key" id="searchProfessorBy" class="form-control" style="margin-left:35vw" placeholder="Search Professor" required>
+             name="key" id="searchProfessorBy" class="form-control" style="margin-left:9vw" placeholder="Search Professor" required>
     </form>
   </div>
+  <a  class="btn-outline-dark" style="color:white" *ngIf="loggedInUser" href="../login" (click)="authenticationService.logOut()">Log Out</a>
 </nav>
 
 <div class="container" id="main-container">
@@ -122,7 +124,7 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">No</button>
-        <button class="btn btn-danger" (click)="onUpdateAppUser(editForm.value); modal.close('Save click')">Save Changes</button>
+        <button class="btn btn-danger" (click)="onUpdateAppUser(editAppUser); modal.close('Save click')">Save Changes</button>
       </div>
     </form>
   </div>
@@ -423,15 +425,15 @@
 </ng-template>
 
 <!-- Notification for no appUsers -->
-<div *ngIf="appUserStudents?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+<div *ngIf="appUserStudents?.length == 0" class="blockquote-footer col-lg-12 col-md-12 col-xl-12">
   <div class="alert alert-info" role="alert">
-    <h4 class="alert-heading">NO PROFESSORS!</h4>
+    <h4 class="alert-heading">NO STUDENTS!</h4>
     <p>No Students were found.</p>
   </div>
 </div>
-<div *ngIf="appUserProfessors?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+<div *ngIf="appUserProfessors?.length == 0" class="blockquote-footer float-right col-lg-12 col-md-12 col-xl-12">
   <div class="alert alert-info" role="alert">
-    <h4 class="alert-heading">NO STUDENTS!</h4>
+    <h4 class="alert-heading">NO PROFESSORS!</h4>
     <p>No Professors were found.</p>
   </div>
 </div>

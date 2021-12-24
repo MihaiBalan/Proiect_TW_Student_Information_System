@@ -207,4 +207,5 @@
     </li>
   </ul>
   <div [ngbNavOutlet]="nav"></div>
+  <a  class="btn" *ngIf="appUser" href="../login" (click)="authenticationService.logOut()">Log Out</a>
 </div>

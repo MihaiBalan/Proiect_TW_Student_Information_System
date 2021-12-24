@@ -1,13 +1,16 @@
 import {Component } from '@angular/core';
 import {document} from "ngx-bootstrap/utils";
+import {AppUserService} from "../appUser.service";
+import {AppUser} from "../appUser";
 
 @Component({templateUrl: 'register.component.html' })
 export class RegisterComponent {
 
-  constructor(){}
+  constructor(private appUserService: AppUserService){}
 
   url: any;
   msg = "";
+  public appUser: AppUser | undefined;
   public remover: boolean | undefined;
 
   selectFile(event: any) {
@@ -43,7 +46,7 @@ export class RegisterComponent {
       document.getElementById('reg_professor').removeAttribute("disabled")
       document.getElementById('reg_professor').setAttribute("placeholder","Enter the proffesor code!");
       //checking if the password is correct
-      if(document.getElementById('reg_professor').value=="proffpass"){
+      if(document.getElementById('reg_professor').value=="password"){
         this.remover = true;}
     }
   }

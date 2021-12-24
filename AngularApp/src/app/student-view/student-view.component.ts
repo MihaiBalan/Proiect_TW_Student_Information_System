@@ -10,7 +10,7 @@ import {AuthenticationService} from "../services/authentication.service";
 export class StudentViewComponent implements OnInit {
   public appUser: AppUser | undefined;
 
-  constructor(private appUserService: AppUserService) {}
+  constructor(private appUserService: AppUserService, public authenticationService: AuthenticationService) {}
 
   ngOnInit() {
     this.getAppUserByEmail(sessionStorage.getItem('username'));

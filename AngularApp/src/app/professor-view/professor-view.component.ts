@@ -4,6 +4,8 @@ import { AppUserService } from '../appUser.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from "@angular/forms";
 import {NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import {AuthenticationService} from "../services/authentication.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -17,9 +19,10 @@ export class ProfessorViewComponent implements OnInit {
   public editAppUser: AppUser | undefined;
   public deleteAppUser: AppUser | undefined;
   public viewAppUser: AppUser | undefined;
+  public loggedInUser: Observable<AppUser> | undefined;
   closeResult: string | undefined;
 
-  constructor(private modalService: NgbModal, private appUserService: AppUserService) {}
+  constructor(private modalService: NgbModal, private appUserService: AppUserService, public authenticationService: AuthenticationService) {}
 
   open(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-title', size: 'lg'}).result.then((result) => {
@@ -41,6 +44,7 @@ export class ProfessorViewComponent implements OnInit {
 
   ngOnInit() {
     this.getAppUsers("Student");
+    this.loggedInUser=this.appUserService.getAppUserByEmail(sessionStorage.getItem('username'));
   }
 
   public getAppUsers(role: string): void {
