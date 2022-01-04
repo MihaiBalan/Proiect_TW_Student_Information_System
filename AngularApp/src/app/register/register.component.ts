@@ -6,7 +6,8 @@ import {AppUser} from "../appUser";
 @Component({templateUrl: 'register.component.html' })
 export class RegisterComponent {
 
-  constructor(private appUserService: AppUserService){}
+  constructor(private appUserService: AppUserService){
+  }
 
   url: any;
   msg = "";
@@ -51,4 +52,51 @@ export class RegisterComponent {
     }
   }
 
+
+  onClickSubmit(data: any) {
+
+    // @ts-ignore
+    this.appUser?.email=data.email;
+    // @ts-ignore
+    this.appUser?.tax=data.tax;
+    if(this.remover)
+    { // @ts-ignore
+      this.appUser?.appUserRole="Professor";
+    }
+    else { // @ts-ignore
+      this.appUser?.appUserRole="Student";
+    }
+    // @ts-ignore
+    this.appUser?.ci=data.ci;
+    // @ts-ignore
+    this.appUser?.year=data.year;
+    // @ts-ignore
+    this.appUser?.birthday=data.birthday;
+    // @ts-ignore
+    this.appUser?.cnp=data.cnp;
+    // @ts-ignore
+    this.appUser?.college=data.college;
+    // @ts-ignore
+    this.appUser?.county=data.county;
+    // @ts-ignore
+    this.appUser?.firstName=data.firstName;
+    // @ts-ignore
+    this.appUser?.lastName=data.lastName;
+    // @ts-ignore
+    this.appUser?.password=data.password;
+    // @ts-ignore
+    this.appUser?.gender=data.gender;
+    // @ts-ignore
+    this.appUser?.phone=data.phone;
+    // @ts-ignore
+    this.appUser?.pictureURL=data.pictureURL;
+    // @ts-ignore
+    this.appUser?.serialNumber=data.serialNumber;
+    // @ts-ignore
+    this.appUser?.specialization=data.specialization;
+    // @ts-ignore
+    this.appUser?.studyType=data.studyType;
+    // @ts-ignore
+    this.appUserService.addAppUser(this.appUser);
+  }
 }

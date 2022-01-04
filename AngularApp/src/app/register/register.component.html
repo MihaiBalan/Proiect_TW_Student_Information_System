@@ -11,7 +11,7 @@
         <div class="card-header text-center font-weight-bold">Register</div>
         <div class="card-body">
           <div class="form-group">
-            <form id="registerForm" method="post" action="/add" role="form" class="form" accept-charset="UTF-8">
+            <form #userRegister = "ngForm" (ngSubmit) = "onClickSubmit(userRegister.value)" id="registerForm" role="form" class="form" accept-charset="UTF-8">
               <div class="col-md-4 float-left">
 
                 <div style="text-align:center">
@@ -19,15 +19,15 @@
                   <div class="form-group">
                     <label id="scrisul_din_register" for="reg_img" class="form-label">Add a profile picture</label><br>
                     <img style="width:130px; height:130px;" [src]="url" *ngIf="url">
-                    <input class="form-control" id="reg_img" type="file" (change)="selectFile($event)">
+                    <input name="pictureURL" class="form-control" id="reg_img" type="file" (change)="selectFile($event)" ngModel>
                   </div>
                 </div>
 
               <span id="scrisul_din_register" class="text-center">Account Information</span>
-                <div class="form-group">
-                  <label class="sr-only">Email</label>
-                  <input type="text" id="reg_username" name="user_name" class="form-control"
-                         value="" placeholder="Email" required>
+                <div class="form-group" style="padding-top:19px;">
+                  <label  class="sr-only">E-mail Address</label>
+                  <input type="email" id="reg_useremail" name="email" class="form-control"
+                         value="" placeholder="Email Address" ngModel>
                 </div>
 
                 <!-- password group -->
@@ -36,8 +36,8 @@
                   <label class="sr-only">Password</label>
                   <!-- password input -->
                   <div class="input-group">
-                    <input type="password" id="reg_userpassword" name="user_password" class="form-control" data-placement="bottom" data-toggle="popover" data-container="body"
-                           data-html="true" value="" placeholder="Password" required>
+                    <input type="password" id="reg_userpassword" name="password" class="form-control" data-placement="bottom" data-toggle="popover" data-container="body"
+                           data-html="true" value="" placeholder="Password" required ngModel>
 
                   </div>
                 </div>
@@ -50,18 +50,10 @@
                   <!-- password-confirm input -->
                   <div class="input-group">
                     <input type="password" id="reg_userpasswordconfirm" class="form-control" data-placement="bottom"
-                           data-toggle="popover" data-container="body" data-html="true" placeholder="Password Confirm" required>
-
+                           data-toggle="popover" data-container="body" data-html="true" placeholder="Password Confirm" required ngModel>
 
                   </div>
 
-                </div>
-
-                <!-- email group -->
-                <div class="form-group">
-                  <label  class="sr-only">E-mail Address</label>
-                  <input type="email" id="reg_useremail" name="user_email" class="form-control"
-                         value="" placeholder="Email Address">
                 </div>
 
             </div>
@@ -72,49 +64,49 @@
             <span id="scrisul_din_register" class="text-center">Personal Information</span>
             <div class="form-group">
               <label class="sr-only">First Name</label>
-              <input type="text" id="reg_firstName" name="user_firstName" class="form-control"
-                     value="" placeholder="First Name">
+              <input type="text" id="reg_firstName" name="firstName" class="form-control"
+                     value="" placeholder="First Name" ngModel>
             </div>
 
             <div class="form-group">
               <label class="sr-only">Last Name</label>
-              <input type="text" id="reg_lastName" name="user_lastName" class="form-control"
-                     value="" placeholder="Last Name">
+              <input type="text" id="reg_lastName" name="lastName" class="form-control"
+                     value="" placeholder="Last Name" ngModel>
             </div>
 
             <div class="form-group">
               <label class="sr-only">CNP</label>
-              <input type="text" id="reg_CNP" name="user_CNP" class="form-control"
-                     value="" placeholder="CNP">
+              <input type="text" id="reg_CNP" name="cnp" class="form-control"
+                     value="" placeholder="CNP" ngModel>
             </div>
 
             <div class="form-group">
               <label class="sr-only">CI</label>
-              <input type="text" id="reg_CI" name="user_CI" class="form-control"
-                     value="" placeholder="CI">
+              <input type="text" id="reg_CI" name="ci" class="form-control"
+                     value="" placeholder="CI" ngModel>
             </div>
 
             <div class="form-group">
               <label class="sr-only">Birthday</label>
-              <input type="date" id="reg_birthday" name="user_birthday" class="form-control"
-                     value="">
+              <input type="date" id="reg_birthday" name="birthday" class="form-control"
+                     value="" ngModel>
             </div>
 
             <div class="form-group">
               <label class="sr-only">Phone Number</label>
-              <input type="text" id="reg_phone" name="user_phone" class="form-control"
-                     value="" placeholder="Phone Number">
+              <input type="text" id="reg_phone" name="phone" class="form-control"
+                     value="" placeholder="Phone Number" ngModel>
             </div>
 
             <div class="form-group">
               <label class="sr-only">County</label>
-              <input type="text" id="reg_county" name="user_county" class="form-control"
-                     value="" placeholder="County">
+              <input type="text" id="reg_county" name="county" class="form-control"
+                     value="" placeholder="County" ngModel>
             </div>
 
             <div class="form-group">
               <label class="sr-only">Gender</label>
-              <select name="user_gender" id="reg_gender" class="form-control">
+              <select name="user_gender" id="reg_gender" name="gender" class="form-control" ngModel>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
               </select>
@@ -127,25 +119,25 @@
                 <span id="scrisul_din_register" class="text-center">Study Information</span>
                 <div class="form-group">
                   <label class="sr-only">College</label>
-                  <input type="text" id="reg_college" name="user_college" class="form-control"
-                         value="" placeholder="College">
+                  <input type="text" id="reg_college" name="college" class="form-control"
+                         value="" placeholder="College" ngModel>
                 </div>
 
                 <div class="form-group">
                   <label class="sr-only">Specialization</label>
-                  <input type="text" id="reg_specialization" name="user_specialization" class="form-control"
-                         value="" placeholder="Specialization">
+                  <input type="text" id="reg_specialization" name="specialization" class="form-control"
+                         value="" placeholder="Specialization" ngModel>
                 </div>
 
                 <div class="form-group">
                   <label class="sr-only">Serial Number</label>
-                  <input type="text" id="reg_serialNumber" name="user_serialNumber" class="form-control"
-                         value="" placeholder="Serial Number">
+                  <input type="text" id="reg_serialNumber" name="serialNumber" class="form-control"
+                         value="" placeholder="Serial Number" ngModel>
                 </div>
 
                 <div class="form-group">
                   <label class="sr-only">Study Type</label>
-                  <select name="user_studyType" id="reg_studyType" class="form-control">
+                  <select name="studyType" id="reg_studyType" class="form-control" ngModel>
                     <option value="Bachelor">Bachelor</option>
                     <option value="Master">Master</option>
                     <option value="Doctorate">Doctorate</option>
@@ -154,20 +146,20 @@
 
                 <div class="form-group">
                   <label class="sr-only">Year</label>
-                  <input type="number" id="reg_year" name="user_year" class="form-control"
-                         value="" placeholder="Year" min="1" max="4">
+                  <input type="number" id="reg_year" name="year" class="form-control"
+                         value="" placeholder="Year" min="1" max="4" ngModel>
                 </div>
 
                 <div class="form-group">
                   <label class="sr-only">Tax</label>
-                  <select name="user_tax" id="reg_tax" class="form-control">
+                  <select name="tax" id="reg_tax" class="form-control" ngModel>
                     <option value="Tax">Tax</option>
                     <option value="Budget">Budget</option>
                   </select>
                 </div>
 
                 <div class="form-group">
-                  <input type="checkbox" id="professor_checkbox" name="professor" value="true" (change)="check_for_professor()">
+                  <input type="checkbox" id="professor_checkbox" name="professor" value="true" (change)="check_for_professor()" ngModel>
                   <label id="scrisul_din_register" for="professor_checkbox">Are you professor?</label>
                   <input type="password" id="reg_professor" name="user_professor" class="form-control" placeholder="Are you proffesor? Check the box!" disabled (change)="check_for_professor()">
                 </div>
