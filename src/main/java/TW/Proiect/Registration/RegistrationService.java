@@ -21,9 +21,9 @@ public class RegistrationService {
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailSender emailSender;
 
-    public String register(RegistrationRequest request) {
+    public String register(AppUser appUser) {
 
-        boolean isValidEmail = emailValidator.test(request.getEmail());
+        boolean isValidEmail = emailValidator.test(appUser.getEmail());
 
         if (!isValidEmail) {
             throw new IllegalStateException("Email is not valid");
@@ -31,31 +31,31 @@ public class RegistrationService {
 
         String token = appUserService.signUpUser(
                 new AppUser(
-                        request.getFirstName(),
-                        request.getLastName(),
-                        request.getEmail(),
-                        request.getPassword(),
-                        request.getBirthday(),
-                        request.getPictureUrl(),
-                        request.getCounty(),
-                        request.getCollege(),
-                        request.getPhone(),
-                        request.getStudyType(),
-                        request.getSpecialization(),
-                        request.getSerialNumber(),
-                        request.getTax(),
-                        request.getCNP(),
-                        request.getCI(),
-                        request.getYear(),
-                        request.getGender(),
-                        request.getAppUserRole()
+                        appUser.getFirstName(),
+                        appUser.getLastName(),
+                        appUser.getEmail(),
+                        appUser.getPassword(),
+                        appUser.getBirthday(),
+                        appUser.getPictureUrl(),
+                        appUser.getCounty(),
+                        appUser.getCollege(),
+                        appUser.getPhone(),
+                        appUser.getStudyType(),
+                        appUser.getSpecialization(),
+                        appUser.getSerialNumber(),
+                        appUser.getTax(),
+                        appUser.getCNP(),
+                        appUser.getCI(),
+                        appUser.getYear(),
+                        appUser.getGender(),
+                        appUser.getAppUserRole()
                 )
         );
 
         String link = "http://localhost:8080/ProiectTW/confirm?token=" + token;
         emailSender.send(
-                request.getEmail(),
-                buildEmail(request.getFirstName(), link));
+                appUser.getEmail(),
+                buildEmail(appUser.getFirstName(), link));
 
         return token;
     }

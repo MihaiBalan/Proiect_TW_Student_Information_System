@@ -105,4 +105,6 @@ public class AppUser implements UserDetails {
         return enabled;
     }
 
+    public String getPictureUrl() { return pictureURL;
+    }
 }

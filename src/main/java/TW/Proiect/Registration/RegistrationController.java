@@ -1,5 +1,6 @@
 package TW.Proiect.Registration;
 
+import TW.Proiect.appUser.AppUser;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +12,8 @@ public class RegistrationController {
     private final RegistrationService registrationService;
 
     @PostMapping(path = "/add")
-    public String register(@RequestBody RegistrationRequest request){
-        return registrationService.register(request);
+    public String register(@RequestBody AppUser user){
+        return registrationService.register(user);
     }
 
     @GetMapping(path = "/confirm")
